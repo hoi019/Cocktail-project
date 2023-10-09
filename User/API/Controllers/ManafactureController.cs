@@ -23,14 +23,13 @@ namespace API.Controllers
 		}
 		[AllowAnonymous]
 		[HttpPost("create-nha-san-xuat")]
-		public UserModel CreateManafacture([FromBody] UserModel md)
+		public ManafactureModel CreateManafacture([FromBody] ManafactureModel md)
 		{
-			_bus.Create(md);
-			return md;
+			return _bus.Create(md);
 		}
 		[AllowAnonymous]
 		[HttpPut("update-nha-san-xuat")]
-		public UserModel UpdateManafacture([FromBody] UserModel md)
+		public ManafactureModel UpdateManafacture([FromBody] ManafactureModel md)
 		{
 			_bus.Update(md);
 			return md;
