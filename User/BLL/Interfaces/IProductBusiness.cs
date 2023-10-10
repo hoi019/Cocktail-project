@@ -9,6 +9,7 @@ namespace BLL.Interfaces
 {
 	public interface IProductBusiness
 	{
+		List<ProductModel> GetAll();
 		ProductModel GetById(int id);
 		bool Create(ProductModel model);
 		bool Update(ProductModel model);

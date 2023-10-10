@@ -9,9 +9,8 @@ namespace DAL.Interfaces
 {
     public interface IUserBusiness
     {
-
-        UserModel GetDataById(string id);
-
+		List<UserModel> GetAll();
+		UserModel GetDataById(string id);
         bool Update(UserModel model);
 
 

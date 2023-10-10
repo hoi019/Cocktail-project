@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-	public class ManafactureRespository : IManafactureRespository
+	public class ManafactureRepository : IManafactureRespository
 	{
 		private IDatabaseHelper _db;
-		public ManafactureRespository(IDatabaseHelper helper)
+		public ManafactureRepository(IDatabaseHelper helper)
 		{
 			_db = helper;
 		}

@@ -9,13 +9,11 @@ namespace DAL.Interfaces
 {
     public interface IAccountRepository
     {
-
-        AccountModel Login(string username, string password);
         List<AccountModel> GetAll();
+        AccountModel Login(string username, string password);
         AccountModel GetDataById(string id);
         bool Create(AccountModel model, string name);
         bool Update(AccountModel model);
-        bool Delete(string id);
-
+        bool Delete(AccountModel model);
     }
 }

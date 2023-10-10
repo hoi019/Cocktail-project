@@ -18,6 +18,6 @@ namespace BLL.Interfaces
 
         bool Update(AccountModel model);
 
-        bool Delete(string id);
+        bool Delete(AccountModel md);
     }
 }

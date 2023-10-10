@@ -121,7 +121,7 @@ namespace DAL
             }
         }
 
-        public bool Delete(string id)
+        public bool Delete(AccountModel md)
         {
             string msgError = "";
             try

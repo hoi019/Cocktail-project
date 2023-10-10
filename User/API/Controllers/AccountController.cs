@@ -60,9 +60,9 @@ namespace API.Controllers
 
 
         [HttpDelete("delete-account")]
-        public IActionResult DeleteItem(string id)
+        public IActionResult DeleteItem(AccountModel md)
         {
-            _accBusiness.Delete(id);
+            _accBusiness.Delete(md);
             return Ok(new { message = "xoa thanh cong" });
         }
 

@@ -9,8 +9,8 @@ namespace DAL.Interfaces
 {
     public interface IUserRepository
     {
-
-        UserModel GetDataById(string id);
+		List<UserModel> GetAll();
+		UserModel GetDataById(string id);
         bool Update(UserModel model);
 
     }

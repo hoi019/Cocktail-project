@@ -19,14 +19,31 @@ namespace DAL
             _db = db;
         }
 
-        public UserModel GetDataById(string id)
+		public List<UserModel> GetAll()
+        {
+			string msgError = "";
+			try
+			{
+				var data = _db.ExecuteQuery("sp_hien_thi_khach_hang");
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				return data.ConvertTo<UserModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+
+		public UserModel GetDataById(string id)
         {
             string msgError = "";
             try
             {
                 var data = _db.ExecuteSProcedureReturnDataTable(
                     out msgError,
-					"sp_hien_thi_khach_hanng", 
+					"sp_tim_kiem_khach_hanng", 
                     "@kid", id);
                 if (!string.IsNullOrEmpty(msgError)) 
                     throw new Exception(msgError);
@@ -45,12 +62,12 @@ namespace DAL
             try
             {
                 var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_sua_khach_hang",
-				"@kid", model.kId,
-				"@tid", model.tId,
-				"@ten", model.kTen,
-				"@sdt", model.kSdt,
-				"@diaChi", model.kDiaChi,
-				"@email", model.kEmail);
+				"@kId", model.kId,
+				"@tId", model.tId,
+				"@kTen", model.kTen,
+				"@kSdt", model.kSdt,
+				"@kDiaChi", model.kDiaChi,
+				"@kEmail", model.kEmail);
 
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
