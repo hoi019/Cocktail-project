@@ -18,10 +18,19 @@ namespace API.Controllers
             _uBusiness = cBusiness;
         }
 
-        [HttpGet("get-by-id")]
+		[AllowAnonymous]
+		[HttpGet("get-all")]
+		public IActionResult GetAll()
+		{
+			var dt = _uBusiness.GetAllUser().Select(x => new { x.kId, x.kTen, x.kDiaChi});
+			return Ok(dt);
+		}
+
+		[AllowAnonymous]
+		[HttpGet("get-by-id")]
         public IActionResult GetDataById(string id)
         {
-            var dt = _uBusiness.GetDataById(id);
+            var dt = _uBusiness.GetDataByIdUser(id);
             return Ok(dt);
         }
 
@@ -29,10 +38,8 @@ namespace API.Controllers
         [HttpPut("update-user")]
         public UserModel UpdateItem([FromBody] UserModel model)
         {
-            _uBusiness.Update(model);
+            _uBusiness.UpdateUser(model);
             return model;
         }
-
-
     }
 }

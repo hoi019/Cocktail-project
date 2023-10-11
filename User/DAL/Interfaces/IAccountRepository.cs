@@ -14,6 +14,6 @@ namespace DAL.Interfaces
         AccountModel GetDataById(string id);
         bool Create(AccountModel model, string name);
         bool Update(AccountModel model);
-        bool Delete(AccountModel model);
+        bool Delete(string id);
     }
 }

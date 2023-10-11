@@ -9,10 +9,10 @@ namespace DAL.Interfaces
 {
 	public interface IManafactureRespository
 	{
-		List<AccountModel> GetAll();
-		ManafactureModel GetDataById(string id);
-		bool Create(ManafactureModel md);
-		bool Update(ManafactureModel md);
-		bool Delete(ManafactureModel md);
+		List<ManafactureModel> GetAllManafacture();
+		ManafactureModel GetDataByIdManafacture(string id);
+		bool CreateManafacture(ManafactureModel md);
+		bool UpdateManafacture(ManafactureModel md);
+		bool DeleteManafacture(string id);
 	}
 }

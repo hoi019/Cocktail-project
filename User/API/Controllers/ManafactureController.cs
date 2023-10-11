@@ -1,4 +1,5 @@
-﻿using DAL.Interfaces;
+﻿using BLL.Interfaces;
+using DAL.Interfaces;
 using DataModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +10,8 @@ namespace API.Controllers
 	[ApiController]
 	public class ManafactureController : Controller
 	{
-		private IUserBusiness _bus;
-		public ManafactureController(IUserBusiness bus)
+		private IManafactureBusiness _bus;
+		public ManafactureController(IManafactureBusiness bus)
 		{
 			_bus = bus;
 		}
@@ -18,28 +19,33 @@ namespace API.Controllers
 		[HttpGet("get-by-id-nha-san-xuat")]
 		public IActionResult GetDataById(string id)
 		{
-			var dt = _bus.GetDataById(id);
+			var dt = _bus.GetDataByIdManafacture(id);
 			return Ok(dt);
 		}
+
 		[AllowAnonymous]
 		[HttpPost("create-nha-san-xuat")]
 		public ManafactureModel CreateManafacture([FromBody] ManafactureModel md)
 		{
-			return _bus.Create(md);
+			_bus.UpdateManafacture(md);
+			return md;
 		}
+
 		[AllowAnonymous]
 		[HttpPut("update-nha-san-xuat")]
 		public ManafactureModel UpdateManafacture([FromBody] ManafactureModel md)
 		{
-			_bus.Update(md);
+			_bus.UpdateManafacture(md);
 			return md;
 		}
+
 		[AllowAnonymous]
 		[HttpDelete("delete-nha-san-xuat")]
-		public UserModel DelteManafacture([FromBody] UserModel model)
+		public string DelteManafacture([FromBody] string model)
 		{
-			_bus.Delete(model);
+			_bus.DeleteManafacture(model);
 			return model;
 		}
+
 	}
 }

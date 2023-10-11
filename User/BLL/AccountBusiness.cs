@@ -69,9 +69,9 @@ namespace BLL
             return _res.Update(model);
         }
 
-        public bool Delete(AccountModel md)
+        public bool Delete(string id)
         {
-            return _res.Delete(md);
+            return _res.Delete(id);
         }
     }
 }

@@ -17,15 +17,17 @@ namespace BLL
             _res = res;
         }
 
-        public UserModel GetDataById(string id)
+		public List<UserModel> GetAllUser()
+		{
+			return _res.GetAllUser();
+		}
+		public UserModel GetDataByIdUser(string id)
         {
-            return _res.GetDataById(id);
+            return _res.GetDataByIdUser(id);
         }
-
-
-        public bool Update(UserModel model)
+        public bool UpdateUser(UserModel model)
         {
-            return _res.Update(model);
+            return _res.UpdateUser(model);
         }
 
     }

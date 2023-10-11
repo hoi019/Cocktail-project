@@ -26,22 +26,21 @@ namespace API.Controllers
             return Ok(new { taikhoan = user.tTaiKhoan, matkhau = user.tMatKhau, token = user.token });
         }
 
-        [Authorize(Roles = Role.Admin)]
-        [HttpGet("get-all")]
+		[AllowAnonymous]
+		[HttpGet("get-all")]
         public IActionResult GetAll()
         {
             var dt = _accBusiness.GetAll().Select(x => new { x.tId, x.tTaiKhoan,x.tMatKhau});
             return Ok(dt);
         }
 
-
-        [HttpGet("get-by-id")]
+		[AllowAnonymous]
+		[HttpGet("get-by-id")]
         public AccountModel GetDataById( string id )
         {
             var dt = _accBusiness.GetDataById(id);
             return dt;
         }
-
 
         [AllowAnonymous]
         [HttpPost("create-account")]
@@ -51,18 +50,19 @@ namespace API.Controllers
             return model;
         }
 
-        [HttpPut("update-account")]
+		[AllowAnonymous]
+		[HttpPut("update-account")]
         public AccountModel UpdateItem([FromBody] AccountModel model)
         {
             _accBusiness.Update(model);
             return model;
         }
 
-
-        [HttpDelete("delete-account")]
-        public IActionResult DeleteItem(AccountModel md)
+		[AllowAnonymous]
+		[HttpDelete("delete-account")]
+        public IActionResult DeleteItem(string id)
         {
-            _accBusiness.Delete(md);
+            _accBusiness.Delete(id);
             return Ok(new { message = "xoa thanh cong" });
         }
 

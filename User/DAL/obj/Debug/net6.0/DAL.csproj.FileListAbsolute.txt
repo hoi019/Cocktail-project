@@ -36,3 +36,10 @@ D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\obj\Debug\net6.0
 D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\obj\Debug\net6.0\DAL.dll
 D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\obj\Debug\net6.0\refint\DAL.dll
 D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\obj\Debug\net6.0\DAL.pdb
+D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\bin\Debug\net6.0\DAL.deps.json
+D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\bin\Debug\net6.0\DAL.dll
+D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\bin\Debug\net6.0\DAL.pdb
+D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\bin\Debug\net6.0\DataModel.dll
+D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\bin\Debug\net6.0\DataModel.pdb
+D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\obj\Debug\net6.0\DAL.csproj.CopyComplete
+D:\Đồ án 2 (bán cocktail với mvc)\NguyenQuocHoi\User\DAL\obj\Debug\net6.0\ref\DAL.dll

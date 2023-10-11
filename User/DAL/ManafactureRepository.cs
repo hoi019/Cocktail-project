@@ -18,12 +18,28 @@ namespace DAL
 		{
 			_db = helper;
 		}
-		public ManafactureModel GetDataById(int id)
+		public List<ManafactureModel> GetAllManafacture()
 		{
 			string msgError = "";
 			try
 			{
-				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_hien_thi_nha_san_xuat",
+				var data = _db.ExecuteQuery("sp_hien_thi_nha_san_xuat");
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				return data.ConvertTo<ManafactureModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+		public ManafactureModel GetDataByIdManafacture(string id)
+		{
+			string msgError = "";
+			try
+			{
+				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_tim_kiem_nha_san_xuat",
 					 "@nId", id);
 				if (!string.IsNullOrEmpty(msgError))
 					throw new Exception(msgError);
@@ -34,7 +50,7 @@ namespace DAL
 				throw ex;
 			}
 		}
-		public bool Create(ManafactureModel md) 
+		public bool CreateManafacture(ManafactureModel md) 
 		{
 			string msgError = "";
 			try
@@ -57,7 +73,7 @@ namespace DAL
 				throw ex;
 			}
 		}
-		public bool Update(ManafactureModel md)
+		public bool UpdateManafacture(ManafactureModel md)
 		{
 			string msgError = "";
 			try
@@ -80,13 +96,13 @@ namespace DAL
 				throw ex;
 			}
 		}
-		public bool Delete(ManafactureModel md)
+		public bool DeleteManafacture(string id)
 		{
 			string msgError = "";
 			try
 			{
 				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_xoa_nha_san_xuat",
-				"@nId", md.nId);
+				"@nId", id);
 
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
 				{

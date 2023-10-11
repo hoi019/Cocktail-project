@@ -9,10 +9,10 @@ namespace BLL.Interfaces
 {
 	public interface IManafactureBusiness
 	{
-		List<ManafactureModel> GetAll();
-		ManafactureModel GetDataById(string id);
-		bool Create(ManafactureModel md);
-		bool Update(ManafactureModel md);
-		bool Delete(string id);
+		List<ManafactureModel> GetAllManafacture();
+		ManafactureModel GetDataByIdManafacture(string id);
+		bool CreateManafacture(ManafactureModel md);
+		bool UpdateManafacture(ManafactureModel md);
+		bool DeleteManafacture(string id);
 	}
 }

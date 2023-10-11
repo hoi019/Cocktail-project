@@ -19,7 +19,7 @@ namespace DAL
             _db = db;
         }
 
-		public List<UserModel> GetAll()
+		public List<UserModel> GetAllUser()
         {
 			string msgError = "";
 			try
@@ -36,7 +36,7 @@ namespace DAL
 			}
 		}
 
-		public UserModel GetDataById(string id)
+		public UserModel GetDataByIdUser(string id)
         {
             string msgError = "";
             try
@@ -56,7 +56,7 @@ namespace DAL
             }
         }
 
-        public bool Update(UserModel model)
+        public bool UpdateUser(UserModel model)
         {
             string msgError = "";
             try

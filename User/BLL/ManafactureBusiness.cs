@@ -17,21 +17,25 @@ namespace BLL
 		{
 			_res = res;
 		}
-		public ManafactureModel GetDataById(string id)
+		public List<ManafactureModel> GetAllManafacture()
 		{
-			return _res.GetDataById(id);
+			return _res.GetAllManafacture();
 		}
-		public bool Create(ManafactureModel md)
+		public ManafactureModel GetDataByIdManafacture(string id)
 		{
-			return _res.Create(md);
+			return _res.GetDataByIdManafacture(id);
 		}
-		public bool Update(ManafactureModel md)
+		public bool CreateManafacture(ManafactureModel md)
 		{
-			return _res.Update(md);
+			return _res.CreateManafacture(md);
 		}
-		public bool Delete(string md)
+		public bool UpdateManafacture(ManafactureModel md)
 		{
-			return _res.Delete(md);
+			return _res.UpdateManafacture(md);
+		}
+		public bool DeleteManafacture(string md)
+		{
+			return _res.DeleteManafacture(md);
 		}
 	}
 }
