@@ -9,10 +9,10 @@ namespace DAL.Interfaces
 {
 	public interface IProductRespository
 	{
-		List<AccountModel> GetAllProduct();
-		ProductModel GetByIdProduct(int id);
+		List<ProductModel> GetAllProduct();
+		ProductModel GetByIdProduct(string id);
 		bool CreateProduct(ProductModel model);
 		bool UpdateProduct(ProductModel model);
-		bool DeleteProduct(ProductModel model);
+		bool DeleteProduct(string id);
 	}
 }

@@ -43,7 +43,7 @@ namespace DAL
             {
                 var data = _db.ExecuteSProcedureReturnDataTable(
                     out msgError,
-					"sp_tim_kiem_khach_hanng", 
+					"sp_tim_kiem_khach_hang", 
                     "@kid", id);
                 if (!string.IsNullOrEmpty(msgError)) 
                     throw new Exception(msgError);

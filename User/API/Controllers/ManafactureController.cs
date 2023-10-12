@@ -23,7 +23,7 @@ namespace API.Controllers
 			return Ok(dt);
 		}
 
-		[AllowAnonymous]
+
 		[HttpPost("create-nha-san-xuat")]
 		public ManafactureModel CreateManafacture([FromBody] ManafactureModel md)
 		{
@@ -31,7 +31,7 @@ namespace API.Controllers
 			return md;
 		}
 
-		[AllowAnonymous]
+
 		[HttpPut("update-nha-san-xuat")]
 		public ManafactureModel UpdateManafacture([FromBody] ManafactureModel md)
 		{
@@ -39,12 +39,12 @@ namespace API.Controllers
 			return md;
 		}
 
-		[AllowAnonymous]
+
 		[HttpDelete("delete-nha-san-xuat")]
-		public string DelteManafacture([FromBody] string model)
+		public IActionResult DelteManafacture(string model)
 		{
 			_bus.DeleteManafacture(model);
-			return model;
+			return Ok(new { message = "xoa thanh cong" });
 		}
 
 	}
