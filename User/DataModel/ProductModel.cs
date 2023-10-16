@@ -8,10 +8,9 @@ namespace DataModel
 {
 	public class ProductModel
 	{
-        public int spId { get; set; }
-        public string sTen { get; set; }
-        public string sGia { get; set; }
-        public string sAnh { get; set; }
-
+        public int? spId { get; set; }
+        public string? sTen { get; set; }
+        public string? sGia { get; set; }
+        public string? sAnh { get; set; }
     }
 }

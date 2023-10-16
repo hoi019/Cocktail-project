@@ -16,6 +16,13 @@ namespace API.Controllers
 			_bus = bus;
 		}
 
+		[HttpGet("get-all")]
+		public IActionResult GetAllManafacture()
+		{
+			var dt = _bus.GetAllManafacture().Select(x => new { x.nId, x.nTen, x.nDiaChi });
+			return Ok(dt);
+		}
+
 		[HttpGet("get-by-id-nha-san-xuat")]
 		public IActionResult GetDataById(string id)
 		{

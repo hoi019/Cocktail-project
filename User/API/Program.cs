@@ -37,8 +37,14 @@ builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<IAccountBusiness, AccountBusiness>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserBusiness, UserBusiness>();
-
-
+builder.Services.AddTransient<IManafactureRespository, ManafactureRepository>();
+builder.Services.AddTransient<IManafactureBusiness, ManafactureBusiness>();
+builder.Services.AddTransient<IProductRespository, ProductRepository>();
+builder.Services.AddTransient<IProductBusiness, ProductBusiness>();
+builder.Services.AddTransient<IBillBusiness, BillBusiness>();
+builder.Services.AddTransient<IBillRepository, BillRepository>();
+builder.Services.AddTransient<IReceiptBusiness, ReceiptBusiness>();
+builder.Services.AddTransient<IReceiptRepository, ReceiptRepository>();
 
 
 // configure strongly typed settings objects

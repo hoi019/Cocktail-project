@@ -8,15 +8,15 @@ namespace API.Controllers
 	public class ProductController : ControllerBase
 	{
 		private IProductBusiness _bus;
-		public ProductController(IProductBusiness _bus)
+		public ProductController(IProductBusiness bus)
 		{
-			_bus = _bus;
+			_bus = bus;
 		}
 
 		[HttpGet("get-all")]
 		public IActionResult GetAllProduct()
 		{
-			var dt = _bus.GetAllProduct().Select(x => new { x.sTen, x.sGia, x.sAnh });
+			var dt = _bus.GetAllProduct().Select(x => new { x.spId, x.sTen, x.sGia, x.sAnh });
 			return Ok(dt);
 		}
 
