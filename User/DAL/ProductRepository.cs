@@ -12,12 +12,10 @@ namespace DAL
 	public class ProductRepository : IProductRespository
 	{
 		private IDatabaseHelper _db;
-
 		public ProductRepository(IDatabaseHelper db)
 		{
 			_db = db;
 		}
-
 		public List<ProductModel> GetAllProduct()
 		{
 			string msgError = "";
