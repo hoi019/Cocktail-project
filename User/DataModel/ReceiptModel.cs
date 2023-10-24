@@ -11,7 +11,7 @@ namespace DataModel
 		public int hdnbId { get; set; }
 		public int nId { get; set; }
 		public string hdnNgayLap { get; set; }
-		public List<ReceiptDetail> list_json_chitiethoadonnhap { get; set; }
+		public List<ReceiptDetail> list_json_chitiethoadon { get; set; }
 	}
 	public class ReceiptDetail
 	{

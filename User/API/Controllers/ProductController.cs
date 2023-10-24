@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+	[Route("api/[controller]")]
+	[ApiController]
 	public class ProductController : ControllerBase
 	{
 		private IProductBusiness _bus;

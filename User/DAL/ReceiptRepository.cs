@@ -44,7 +44,7 @@ namespace DAL
 				"sp_them_hoa_don_nhap",
 				"@nId", model.nId,
 				"@hdnNgayLap", model.hdnNgayLap,
-				"@list_json_chitiethoadonnhap", model.list_json_chitiethoadonnhap != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadonnhap) : null);
+				"@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
 				{
 					throw new Exception(Convert.ToString(result) + msgError);
@@ -67,7 +67,7 @@ namespace DAL
 				"@hdnId", model.hdnbId,
 				"@nId", model.nId,
 				"@hdnNgayLap", model.hdnNgayLap,
-				"@list_json_chitiethoadonnhap", model.list_json_chitiethoadonnhap != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadonnhap) : null);
+				"@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
 				{
 					throw new Exception(Convert.ToString(result) + msgError);

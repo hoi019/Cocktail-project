@@ -21,7 +21,7 @@ namespace DAL
 			string msgError = "";
 			try
 			{
-				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError,
+				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, 
 					 "sp_hien_thi_hoa_don_ban",
 					 "@MaHoaDon", id);
 				if (!string.IsNullOrEmpty(msgError))
