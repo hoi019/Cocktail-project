@@ -12,5 +12,6 @@ namespace DAL.Interfaces
 		BillModel GetDatabyIDBill(int id);
 		bool CreateBill(BillModel model);
 		bool UpdateBill(BillModel model);
+
 	}
 }
