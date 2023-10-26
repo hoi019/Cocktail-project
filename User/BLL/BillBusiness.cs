@@ -28,5 +28,9 @@ namespace BLL
 		{
 			return _res.UpdateBill(model);
 		}
+		public List<StatisticsModel> StatisticsUser(int pageIndex, int pageSize, out long total, string ten_khach, DateTime? fr_NgayTao, DateTime? to_NgayTao)
+		{
+			return _res.StatisticsUser(pageIndex, pageSize, out total, ten_khach, fr_NgayTao, to_NgayTao);
+		}
 	}
 }

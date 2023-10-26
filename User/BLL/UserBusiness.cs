@@ -16,7 +16,6 @@ namespace BLL
         {
             _res = res;
         }
-
 		public List<UserModel> GetAllUser()
 		{
 			return _res.GetAllUser();
@@ -29,6 +28,9 @@ namespace BLL
         {
             return _res.UpdateUser(model);
         }
-
-    }
+		public List<UserModel> SearchUser(int pageIndex, int pageSize, out long total, string ten_khach, string dia_chi)
+        {
+            return _res.SearchUser(pageIndex, pageSize, out total, ten_khach, dia_chi);
+        }
+	}
 }

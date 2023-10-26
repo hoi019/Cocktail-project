@@ -12,6 +12,6 @@ namespace DAL.Interfaces
 		List<UserModel> GetAllUser();
 		UserModel GetDataByIdUser(string id);
         bool UpdateUser(UserModel model);
-
-    }
+		List<UserModel> SearchUser(int pageIndex, int pageSize, out long total, string ten_khach, string dia_chi);
+	}
 }

@@ -76,5 +76,29 @@ namespace DAL
 				throw ex;
 			}
 		}
+		public List<StatisticsModel> StatisticsUser(int pageIndex, int pageSize, out long total, string ten_khach, DateTime? fr_NgayTao, DateTime? to_NgayTao)
+		{
+			string msgError = "";
+			total = 0;
+			try
+			{
+				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_thong_ke_khach",
+					"@page_index", pageIndex,
+					"@page_size", pageSize,
+					"@ten_khach", ten_khach,
+					"@fr_NgayTao", fr_NgayTao,
+					"@to_NgayTao", to_NgayTao
+					 );
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+				return dt.ConvertTo<StatisticsModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 	}
 }
