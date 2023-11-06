@@ -9,6 +9,7 @@ namespace BLL.Interfaces
 {
 	public interface IBillBusiness
 	{
+		List<BillModel> GetAllBill();
 		BillModel GetDatabyIDBill(int id);
 		bool CreateBill(BillModel model);
 		bool UpdateBill(BillModel model);

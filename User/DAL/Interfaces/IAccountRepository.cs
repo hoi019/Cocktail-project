@@ -12,7 +12,7 @@ namespace DAL.Interfaces
         List<AccountModel> GetAll();
         AccountModel Login(string username, string password);
         AccountModel GetDataById(string id);
-        bool Create(AccountModel model, string name);
+        bool Create(AccountModel model);
         bool Update(AccountModel model);
         bool Delete(string id);
     }

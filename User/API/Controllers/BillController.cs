@@ -12,6 +12,13 @@ namespace API.Controllers
 			_bus = bus;
 		}
 
+		[HttpGet("get-all")]
+		public IActionResult GetAllBill()
+		{
+			var dt = _bus.GetAllBill().Select(x => new { x.hdbId, x.kId, x.hdbNgayLap });
+			return Ok(dt);
+		}
+
 		[Route("get-by-id/{id}")]
 		[HttpGet]
 		public BillModel GetDatabyIDbill(int id)

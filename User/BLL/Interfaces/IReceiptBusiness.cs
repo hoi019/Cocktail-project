@@ -9,6 +9,7 @@ namespace BLL.Interfaces
 {
 	public interface IReceiptBusiness
 	{
+		List<ReceiptModel> GetAllReceipt();
 		ReceiptModel GetDatabyIDReceipt(int id);
 		bool CreateReceipt(ReceiptModel model);
 		bool UpdateReceipt(ReceiptModel model);

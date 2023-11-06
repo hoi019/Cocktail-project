@@ -9,6 +9,7 @@ namespace DAL.Interfaces
 {
 	public interface IReceiptRepository
 	{
+		List<ReceiptModel> GetAllReceipt();
 		ReceiptModel GetDatabyIDReceipt(int id);
 		bool CreateReceipt(ReceiptModel model);
 		bool UpdateReceipt(ReceiptModel model);

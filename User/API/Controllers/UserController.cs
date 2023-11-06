@@ -22,7 +22,7 @@ namespace API.Controllers
 		[HttpGet("get-all")]
 		public IActionResult GetAll()
 		{
-			var dt = _uBusiness.GetAllUser().Select(x => new { x.kId, x.kTen, x.kDiaChi});
+			var dt = _uBusiness.GetAllUser().Select(x => new { x.kId, x.tId, x.kTen, x.kSdt, x.kDiaChi, x.kEmail});
 			return Ok(dt);
 		}
 

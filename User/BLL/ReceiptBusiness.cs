@@ -17,6 +17,10 @@ namespace BLL
 			_res = res;
 		}
 
+		public List<ReceiptModel> GetAllReceipt()
+		{
+			return _res.GetAllReceipt();
+		}
 		public ReceiptModel GetDatabyIDReceipt(int id)
 		{
 			return _res.GetDatabyIDReceipt(id);

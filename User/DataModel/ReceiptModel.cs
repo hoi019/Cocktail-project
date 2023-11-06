@@ -8,7 +8,7 @@ namespace DataModel
 {
 	public class ReceiptModel
 	{
-		public int hdnbId { get; set; }
+		public int hdnId { get; set; }
 		public int nId { get; set; }
 		public string hdnNgayLap { get; set; }
 		public List<ReceiptDetail> list_json_chitiethoadon { get; set; }

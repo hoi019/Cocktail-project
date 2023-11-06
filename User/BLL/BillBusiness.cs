@@ -16,6 +16,12 @@ namespace BLL
 		{
 			_res = res;
 		}
+
+		public List<BillModel> GetAllBill()
+		{
+			return _res.GetAllBill();
+		}
+
 		public BillModel GetDatabyIDBill(int id)
 		{
 			return _res.GetDatabyIDBill(id);

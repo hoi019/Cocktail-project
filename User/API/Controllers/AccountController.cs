@@ -46,7 +46,7 @@ namespace API.Controllers
         [HttpPost("create-account")]
         public AccountModel CreateItem([FromBody] AccountModel model, string name)
         {
-            _accBusiness.Create(model, name);
+            _accBusiness.Create(model);
             return model;
         }
 

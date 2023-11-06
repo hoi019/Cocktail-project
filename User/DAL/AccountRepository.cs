@@ -64,8 +64,7 @@ namespace DAL
                 var data = _db.ExecuteSProcedureReturnDataTable(
                     out msgError,
 					"sp_tim_kiem_tai_khoan", 
-                    "@tId", 
-                    id);
+                    "@tId", id);
                 if (!string.IsNullOrEmpty(msgError)) 
                     throw new Exception(msgError);
                 return data.ConvertTo<AccountModel>().FirstOrDefault();
@@ -77,16 +76,17 @@ namespace DAL
             }
         }
 
-        public bool Create(AccountModel model, string name)
+        public bool Create(AccountModel model)
         {
             string msgError = "";
             try
             {
                 var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError,
-                "sp_them_khach_hang",
+                "sp_them_tai_khoan",
                 "@tTaiKhoan", model.tTaiKhoan,
                 "@tMatKhau", model.tMatKhau,
-                "@name", name);
+				"@kTen", model.kTen,
+				"@tLoai", model.tLoai);
 
 
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
@@ -126,7 +126,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_xoa_khach_hang",
+                var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_xoa_tai_khoan",
                 "@tId", id);
 ;
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))

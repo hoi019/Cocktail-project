@@ -12,6 +12,13 @@ namespace API.Controllers
 			_bus = bus;
 		}
 
+		//[HttpGet("get-all")]
+		//public IActionResult GetAllReceipt()
+		//{
+		//	var dt = _bus.GetAllReceipt().Select(x => new { x.hdnId, x.nId, x.hdnNgayLap });
+		//	return Ok(dt);
+		//}
+
 		[Route("get-by-id-receipt/{id}")]
 		[HttpGet]
 		public ReceiptModel GetDatabyIDReceipt(int id)

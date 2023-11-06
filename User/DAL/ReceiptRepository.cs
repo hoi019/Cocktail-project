@@ -17,6 +17,23 @@ namespace DAL
 			_db = db;
 		}
 
+		public List<ReceiptModel> GetAllReceipt()
+		{
+			string msgError = "";
+			try
+			{
+				var data = _db.ExecuteQuery("sp_hien_thi_hdn");
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				return data.ConvertTo<ReceiptModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+
 		public ReceiptModel GetDatabyIDReceipt(int id)
 		{
 			string msgError = "";
@@ -64,7 +81,7 @@ namespace DAL
 			{
 				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError,
 				"sp_sua_hoa_don_nhap",
-				"@hdnId", model.hdnbId,
+				"@hdnId", model.hdnId,
 				"@nId", model.nId,
 				"@hdnNgayLap", model.hdnNgayLap,
 				"@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);

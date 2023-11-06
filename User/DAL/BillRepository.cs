@@ -16,6 +16,24 @@ namespace DAL
 		{
 			_db = helper;
 		}
+
+		public List<BillModel> GetAllBill()
+		{
+			string msgError = "";
+			try
+			{
+				var data = _db.ExecuteQuery("sp_hien_thi_hdb");
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				return data.ConvertTo<BillModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+
 		public BillModel GetDatabyIDBill(int id)
 		{
 			string msgError = "";

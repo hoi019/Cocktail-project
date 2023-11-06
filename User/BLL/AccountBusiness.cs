@@ -59,9 +59,9 @@ namespace BLL
             return _res.GetDataById(id);
         }
 
-        public bool Create(AccountModel model, string name)
+        public bool Create(AccountModel model)
         {
-            return _res.Create(model, name);
+            return _res.Create(model);
         }
 
         public bool Update(AccountModel model)
@@ -70,7 +70,7 @@ namespace BLL
         }
 
         public bool Delete(string id)
-        {
+		{
             return _res.Delete(id);
         }
     }
