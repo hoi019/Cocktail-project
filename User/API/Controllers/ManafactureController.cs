@@ -19,7 +19,7 @@ namespace API.Controllers
 		[HttpGet("get-all")]
 		public IActionResult GetAllManafacture()
 		{
-			var dt = _bus.GetAllManafacture().Select(x => new { x.nId, x.nTen, x.nDiaChi });
+			var dt = _bus.GetAllManafacture().Select(x => new { x.nId, x.nTen, x.nSdt, x.nDiaChi, x.nEmail });
 			return Ok(dt);
 		}
 

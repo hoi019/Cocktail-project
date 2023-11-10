@@ -10,7 +10,7 @@ namespace DataModel
 	{
         public int? spId { get; set; }
         public string? sTen { get; set; }
-        public string? sGia { get; set; }
+        public int? sGia { get; set; }
         public string? sAnh { get; set; }
     }
 }
