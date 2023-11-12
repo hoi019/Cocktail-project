@@ -1,0 +1,74 @@
+.container-box {
+  padding: 40px 100px 80px 120px;
+  margin-bottom: 50px;
+}
+
+.table-box{
+
+}
+.border-right {
+
+}
+.colum{
+  background-color: orange;
+  border: 1px solid black;
+}
+.colum-title{
+  padding: 10px 75px;
+}
+.colum-content{
+  border-left: 1px solid black;
+}
+.colum-content:last-child{
+  border-right: 1px solid black;
+}
+.img_cart {
+  height: 60px;
+  width: 60px;
+}
+input {
+  width: 50px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    padding-left: 14px;
+}
+.fa-minus .fa-plus {
+  cursor: pointer;
+}
+.fa-plus {
+  padding-left: 10px;
+}
+.fa-minus {
+  padding-right: 10px;
+}
+
+.bottom-content {
+  border-bottom: 1px solid black;
+}
+
+.borr {
+  border: 1px solid black;
+}
+.button-cart {
+  position: relative;
+  margin-top: 30px;
+}
+.button-cart li {
+  list-style: none;
+  right: 75px;
+  position: absolute;
+  font-size: 20px;
+}
+.button-cart button {
+  position: absolute;
+  right: 75px;
+  top: 45px;
+  padding: 15px 30px;
+  font-size: 17px;
+  background: #ffd07a;
+}
+.button-cart button:hover {
+  background-color: orange;
+  cursor: pointer;
+}
