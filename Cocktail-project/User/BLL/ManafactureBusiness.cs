@@ -37,5 +37,9 @@ namespace BLL
 		{
 			return _res.DeleteManafacture(md);
 		}
+		public List<ManafactureModel> SearchManafacture(int pageIndex, int pageSize, string ten_khach, out long total)
+		{
+			return _res.SearchManafacture(pageIndex, pageSize, ten_khach, out total);
+		}
 	}
 }

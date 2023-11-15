@@ -54,5 +54,33 @@ namespace API.Controllers
 			return Ok(new { message = "xoa thanh cong" });
 		}
 
+		[Route("search-manafacture")]
+		[HttpPost]
+		public IActionResult Search([FromBody] Dictionary<string, object> formData)
+		{
+			try
+			{
+				var page = int.Parse(formData["page"].ToString());
+				var pageSize = int.Parse(formData["pageSize"].ToString());
+				string ten_khach = "";
+				if (formData.Keys.Contains("ten") && !string.IsNullOrEmpty(Convert.ToString(formData["ten"]))) { ten_khach = Convert.ToString(formData["ten"]); }
+
+				long total = 0;
+				var data = _bus.SearchManafacture(page, pageSize, ten_khach, out total);
+				return Ok(
+					new
+					{
+						TotalItems = total,
+						Page = page,
+						PageSize = pageSize,
+						Data = data
+					}
+					);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
 	}
 }

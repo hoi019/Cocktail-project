@@ -116,5 +116,26 @@ namespace DAL
 				throw ex;
 			}
 		}
+
+		public List<ManafactureModel> SearchManafacture(int pageIndex, int pageSize, string ten_khach, out long total)
+		{
+			string msgError = "";
+			total = 0;
+			try
+			{
+				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_tim_nha_san_xuat",
+					"@page_index", pageIndex,
+					"@page_size", pageSize,
+					"@ten", ten_khach);
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+				return dt.ConvertTo<ManafactureModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
 	}
 }
