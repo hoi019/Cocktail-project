@@ -14,5 +14,6 @@ namespace BLL.Interfaces
 		bool CreateProduct(ProductModel model);
 		bool UpdateProduct(ProductModel model);
 		bool DeleteProduct(string id);
+		List<ProductModel> SearchProduct(int pageIndex, int pageSize, string ten_khach, out long total);
 	}
 }

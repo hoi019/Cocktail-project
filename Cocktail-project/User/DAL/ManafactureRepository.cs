@@ -50,17 +50,18 @@ namespace DAL
 				throw ex;
 			}
 		}
-		public bool CreateManafacture(ManafactureModel md) 
+		public bool CreateManafacture(ManafactureModel model)
 		{
 			string msgError = "";
 			try
 			{
 				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError,
 				"sp_them_nha_san_xuat",
-				"@nTen", md.nTen,
-				"@nSdt", md.nSdt,
-				"@nDiaChi", md.nDiaChi,
-				"@nEmail", md.nEmail);
+				"@nTen", model.nTen,
+				"@nSdt", model.nSdt,
+				"@nDiaChi", model.nDiaChi,
+				"@nEmail", model.nEmail);
+
 
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
 				{

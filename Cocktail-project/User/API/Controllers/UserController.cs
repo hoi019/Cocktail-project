@@ -42,6 +42,13 @@ namespace API.Controllers
             return model;
         }
 
+		[HttpDelete("delete-user")]
+		public IActionResult DeleteUser(string model)
+		{
+			_uBusiness.DeleteUser(model);
+			return Ok(new { message = "xoa thanh cong" });
+		}
+
 		[Route("search-user")]
 		[HttpPost]
 		public IActionResult Search([FromBody] Dictionary<string, object> formData)
@@ -51,18 +58,17 @@ namespace API.Controllers
 				var page = int.Parse(formData["page"].ToString());
 				var pageSize = int.Parse(formData["pageSize"].ToString());
 				string ten_khach = "";
-				if (formData.Keys.Contains("ten_khach") && !string.IsNullOrEmpty(Convert.ToString(formData["ten_khach"]))) { ten_khach = Convert.ToString(formData["ten_khach"]); }
-				string dia_chi = "";
-				if (formData.Keys.Contains("dia_chi") && !string.IsNullOrEmpty(Convert.ToString(formData["dia_chi"]))) { dia_chi = Convert.ToString(formData["dia_chi"]); }
+				if (formData.Keys.Contains("ten") && !string.IsNullOrEmpty(Convert.ToString(formData["ten"]))) { ten_khach = Convert.ToString(formData["ten"]); }
+				
 				long total = 0;
-				var data = _uBusiness.SearchUser(page, pageSize, out total, ten_khach, dia_chi);
+				var data = _uBusiness.SearchUser(page, pageSize, ten_khach, out total);
 				return Ok(
 					new
 					{
 						TotalItems = total,
-						Data = data,
 						Page = page,
-						PageSize = pageSize
+						PageSize = pageSize,
+						Data = data
 					}
 					);
 			}
