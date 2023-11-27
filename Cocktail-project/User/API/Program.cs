@@ -45,6 +45,8 @@ builder.Services.AddTransient<IBillBusiness, BillBusiness>();
 builder.Services.AddTransient<IBillRepository, BillRepository>();
 builder.Services.AddTransient<IReceiptBusiness, ReceiptBusiness>();
 builder.Services.AddTransient<IReceiptRepository, ReceiptRepository>();
+builder.Services.AddTransient<IBillDetailsBusiness, BillDetailsBusiness>();
+builder.Services.AddTransient<IBillDetaislRepository, BillDetailsRepository>();
 
 
 // configure strongly typed settings objects

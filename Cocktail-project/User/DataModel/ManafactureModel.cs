@@ -8,10 +8,10 @@ namespace DataModel
 {
 	public class ManafactureModel
 	{
-        public int nId { get; set; }
-        public string nTen { get; set; }
-        public string nSdt { get; set; }
-        public string nDiaChi { get; set; }
-        public string nEmail { get; set; }
+        public int? nId { get; set; }
+        public string? nTen { get; set; }
+        public string? nSdt { get; set; }
+        public string? nDiaChi { get; set; }
+        public string? nEmail { get; set; }
     }
 }

@@ -13,7 +13,8 @@ namespace BLL.Interfaces
 		BillModel GetDatabyIDBill(int id);
 		bool CreateBill(BillModel model);
 		bool UpdateBill(BillModel model);
-		List<BillModel> SearchBill(int pageIndex, int pageSize, string ten_khach, out long total);
+		bool CheckBill(BillModel model);
+		List<BillModel> SearchBill(int pageIndex, int pageSize, string ten, out long total);
 		List<StatisticsModel> StatisticsUser(int pageIndex, int pageSize, out long total, string ten_khach, DateTime? fr_NgayTao, DateTime? to_NgayTao);
 	}
 }

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+	[Route("api/[controller]")]
+	[ApiController]
 	public class BillController : ControllerBase
 	{
 		private IBillBusiness _bus;
@@ -15,7 +17,7 @@ namespace API.Controllers
 		[HttpGet("get-all")]
 		public IActionResult GetAllBill()
 		{
-			var dt = _bus.GetAllBill().Select(x => new { x.hdbId, x.kId, x.hdbNgayLap });
+			var dt = _bus.GetAllBill().Select(x => new { x.hdbId, x.kId, x.hdbNgayLap, x.hdbMoTa });
 			return Ok(dt);
 		}
 
@@ -35,11 +37,51 @@ namespace API.Controllers
 		}
 
 		[Route("update-bill")]
-		[HttpPost]
+		[HttpPut]
 		public BillModel UpdateBiill([FromBody] BillModel model)
 		{
 			_bus.UpdateBill(model);
 			return model;
+		}
+
+		[Route("check-bill")]
+		[HttpPut]
+		public BillModel CheckBiill([FromBody] BillModel model)
+		{
+			_bus.CheckBill(model);
+			return model;
+		}
+
+		[Route("search-bill")]
+		[HttpPost]
+		public IActionResult SearchBill([FromBody] Dictionary<string, object> formData)
+		{
+			try
+			{
+				var page = int.Parse(formData["page"].ToString());
+				var pageSize = int.Parse(formData["pageSize"].ToString());
+				string ten = "";
+				if (formData.Keys.Contains("ten") && !string.IsNullOrEmpty(Convert.ToString(formData["ten"])))
+				{
+					ten = Convert.ToString(formData["ten"]);
+				}
+
+				long total = 0;
+				var data = _bus.SearchBill(page, pageSize, ten, out total);
+				return Ok(
+					new
+					{
+						TotalItems = total,
+						Page = page,
+						PageSize = pageSize,
+						Data = data
+					}
+					);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 		}
 
 		[Route("Statistics-user-by-bill")]
@@ -70,9 +112,9 @@ namespace API.Controllers
 					new
 					{
 						TotalItems = total,
-						Data = data,
 						Page = page,
-						PageSize = pageSize
+						PageSize = pageSize,
+						Data = data
 					}
 					);
 			}

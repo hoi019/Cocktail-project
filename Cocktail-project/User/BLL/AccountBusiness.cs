@@ -73,5 +73,9 @@ namespace BLL
 		{
             return _res.Delete(id);
         }
-    }
+		public List<AccountModel> SearchAccount(int pageIndex, int pageSize, string ten, out long total)
+		{
+			return _res.SearchAccount(pageIndex, pageSize, ten, out total);
+		}
+	}
 }

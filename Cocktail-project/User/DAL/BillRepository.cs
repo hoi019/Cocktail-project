@@ -60,6 +60,7 @@ namespace DAL
 				"sp_them_hoa_don_ban",
 				"@kId", model.kId,
 				"@hdbNgayLap", model.hdbNgayLap,
+				"@hdbMoTa", model.hdbMoTa,
 				"@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
 				{
@@ -94,6 +95,28 @@ namespace DAL
 				throw ex;
 			}
 		}
+
+		public bool CheckBill(BillModel model)
+		{
+			string msgError = "";
+			try
+			{
+				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError,
+				"sp_kiem_duyet_hoa_don_ban",
+				"@hdbId", model.hdbId,
+				"@hdbMoTa", model.hdbMoTa);
+				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+				{
+					throw new Exception(Convert.ToString(result) + msgError);
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public List<StatisticsModel> StatisticsUser(int pageIndex, int pageSize, out long total, string ten_khach, DateTime? fr_NgayTao, DateTime? to_NgayTao)
 		{
 			string msgError = "";
@@ -118,5 +141,25 @@ namespace DAL
 			}
 		}
 
+		public List<BillModel> SearchBill(int pageIndex, int pageSize, string ten, out long total)
+		{
+			string msgError = "";
+			total = 0;
+			try
+			{
+				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_tim_hoa_don",
+					"@page_index", pageIndex,
+					"@page_size", pageSize,
+					"@ten", ten);
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+				return dt.ConvertTo<BillModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
 	}
 }

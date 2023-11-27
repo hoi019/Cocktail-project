@@ -14,6 +14,6 @@ namespace BLL.Interfaces
 		bool CreateManafacture(ManafactureModel md);
 		bool UpdateManafacture(ManafactureModel md);
 		bool DeleteManafacture(string id);
-		List<ManafactureModel> SearchManafacture(int pageIndex, int pageSize, string ten_khach, out long total);
+		List<ManafactureModel> SearchManafacture(int pageIndex, int pageSize, string ten, out long total);
 	}
 }

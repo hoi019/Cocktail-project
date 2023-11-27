@@ -14,9 +14,9 @@ namespace DAL
 	public class ManafactureRepository : IManafactureRespository
 	{
 		private IDatabaseHelper _db;
-		public ManafactureRepository(IDatabaseHelper helper)
+		public ManafactureRepository(IDatabaseHelper db)
 		{
-			_db = helper;
+			_db = db;
 		}
 		public List<ManafactureModel> GetAllManafacture()
 		{
@@ -34,6 +34,7 @@ namespace DAL
 				throw ex;
 			}
 		}
+		
 		public ManafactureModel GetDataByIdManafacture(string id)
 		{
 			string msgError = "";
@@ -102,9 +103,9 @@ namespace DAL
 			string msgError = "";
 			try
 			{
-				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_xoa_nha_san_xuat",
-				"@nId", id);
-
+				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, 
+					"sp_xoa_nha_san_xuat",
+					"@nId", id);
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
 				{
 					throw new Exception(Convert.ToString(result) + msgError);
@@ -117,7 +118,7 @@ namespace DAL
 			}
 		}
 
-		public List<ManafactureModel> SearchManafacture(int pageIndex, int pageSize, string ten_khach, out long total)
+		public List<ManafactureModel> SearchManafacture(int pageIndex, int pageSize, string ten, out long total)
 		{
 			string msgError = "";
 			total = 0;
@@ -126,7 +127,7 @@ namespace DAL
 				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_tim_nha_san_xuat",
 					"@page_index", pageIndex,
 					"@page_size", pageSize,
-					"@ten", ten_khach);
+					"@ten", ten);
 				if (!string.IsNullOrEmpty(msgError))
 					throw new Exception(msgError);
 				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];

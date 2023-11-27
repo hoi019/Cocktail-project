@@ -1,0 +1,24 @@
+﻿using BLL.Interfaces;
+using DataModel;
+using Microsoft.AspNetCore.Mvc;
+
+namespace API.Controllers
+{
+	[Route("api/[controller]")]
+	[ApiController]
+	public class BillDetailsController : Controller
+	{
+		private IBillDetailsBusiness _bus;
+		public BillDetailsController(IBillDetailsBusiness bus)
+		{
+			_bus = bus;
+		}
+
+		[Route("get-by-id/{id}")]
+		[HttpGet]
+		public BillDetail GetAllByIdBill(int id)
+		{
+			return _bus.GetAllByIdBill(id);
+		}
+	}
+}

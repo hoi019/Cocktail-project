@@ -8,7 +8,7 @@ namespace DataModel
 {
     public class AccountModel
     {
-		public int tId { get; set; }
+		public int? tId { get; set; }
 		public string? tTaiKhoan { get; set; }
 		public string? tMatKhau { get; set; }
         public string? kTen { get; set; }

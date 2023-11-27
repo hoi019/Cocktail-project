@@ -15,5 +15,7 @@ namespace BLL.Interfaces
 		bool Create(AccountModel model);
 		bool Update(AccountModel model);
 		bool Delete(string id);
+		List<AccountModel> SearchAccount(int pageIndex, int pageSize, string ten, out long total);
+
 	}
 }

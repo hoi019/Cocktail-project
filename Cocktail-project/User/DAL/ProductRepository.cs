@@ -117,7 +117,7 @@ namespace DAL
 			}
 		}
 
-		public List<ProductModel> SearchProduct(int pageIndex, int pageSize, string ten_khach, out long total)
+		public List<ProductModel> SearchProduct(int pageIndex, int pageSize, string ten, out long total)
 		{
 			string msgError = "";
 			total = 0;
@@ -126,7 +126,7 @@ namespace DAL
 				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_tim_san_pham",
 					"@page_index", pageIndex,
 					"@page_size", pageSize,
-					"@ten", ten_khach);
+					"@ten", ten);
 				if (!string.IsNullOrEmpty(msgError))
 					throw new Exception(msgError);
 				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];

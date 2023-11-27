@@ -23,31 +23,28 @@ namespace API.Controllers
 			return Ok(dt);
 		}
 
-		[HttpGet("get-by-id-nha-san-xuat")]
+		[HttpGet("get-by-id-manafacture")]
 		public IActionResult GetDataById(string id)
 		{
 			var dt = _bus.GetDataByIdManafacture(id);
 			return Ok(dt);
 		}
-
-
-		[HttpPost("create-nha-san-xuat")]
+		[HttpPost("create-manafacture")]
 		public ManafactureModel CreateManafacture([FromBody] ManafactureModel md)
 		{
-			_bus.UpdateManafacture(md);
+			_bus.CreateManafacture(md);
 			return md;
 		}
 
-
-		[HttpPut("update-nha-san-xuat")]
-		public ManafactureModel UpdateManafacture([FromBody] ManafactureModel md)
+		[HttpPut("update-manafacture")]
+		public ManafactureModel UpdateManafacture([FromBody] ManafactureModel model)
 		{
-			_bus.UpdateManafacture(md);
-			return md;
+			_bus.UpdateManafacture(model);
+			return model;
 		}
 
 
-		[HttpDelete("delete-nha-san-xuat")]
+		[HttpDelete("delete-manafacture")]
 		public IActionResult DelteManafacture(string model)
 		{
 			_bus.DeleteManafacture(model);
@@ -62,11 +59,14 @@ namespace API.Controllers
 			{
 				var page = int.Parse(formData["page"].ToString());
 				var pageSize = int.Parse(formData["pageSize"].ToString());
-				string ten_khach = "";
-				if (formData.Keys.Contains("ten") && !string.IsNullOrEmpty(Convert.ToString(formData["ten"]))) { ten_khach = Convert.ToString(formData["ten"]); }
+				string ten = "";
+				if (formData.Keys.Contains("ten") && !string.IsNullOrEmpty(Convert.ToString(formData["ten"])))
+				{
+					ten = Convert.ToString(formData["ten"]);
+				}
 
 				long total = 0;
-				var data = _bus.SearchManafacture(page, pageSize, ten_khach, out total);
+				var data = _bus.SearchManafacture(page, pageSize, ten, out total);
 				return Ok(
 					new
 					{

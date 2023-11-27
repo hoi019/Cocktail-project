@@ -58,11 +58,14 @@ namespace API.Controllers
 			{
 				var page = int.Parse(formData["page"].ToString());
 				var pageSize = int.Parse(formData["pageSize"].ToString());
-				string ten_khach = "";
-				if (formData.Keys.Contains("ten") && !string.IsNullOrEmpty(Convert.ToString(formData["ten"]))) { ten_khach = Convert.ToString(formData["ten"]); }
-
+				string ten = "";
+				if (formData.Keys.Contains("ten") && !string.IsNullOrEmpty(Convert.ToString(formData["ten"])))
+				{
+					ten = Convert.ToString(formData["ten"]);
+				}
+				
 				long total = 0;
-				var data = _bus.SearchProduct(page, pageSize, ten_khach, out total);
+				var data = _bus.SearchProduct(page, pageSize, ten, out total);
 				return Ok(
 					new
 					{

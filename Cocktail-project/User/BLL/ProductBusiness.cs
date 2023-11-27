@@ -37,9 +37,9 @@ namespace BLL
 		{
 			return _res.DeleteProduct(id);
 		}
-		public List<ProductModel> SearchProduct(int pageIndex, int pageSize, string ten_khach, out long total)
+		public List<ProductModel> SearchProduct(int pageIndex, int pageSize, string ten, out long total)
 		{
-			return _res.SearchProduct(pageIndex, pageSize, ten_khach, out total);
+			return _res.SearchProduct(pageIndex, pageSize, ten, out total);
 		}
 	}
 }
