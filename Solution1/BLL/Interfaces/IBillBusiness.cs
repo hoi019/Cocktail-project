@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {
-	public interface IProductBusiness
+	public interface IBillBusiness
 	{
-		List<ProductModel> GetAllProduct();
-		ProductModel GetByIdProduct(string id);
-		List<ProductModel> FilterProduct(int index);
+		BillModel GetDatabyIDBill(int id);
+		bool CreateBill(BillModel model);
 	}
 }

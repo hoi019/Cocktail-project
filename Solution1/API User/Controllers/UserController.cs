@@ -42,6 +42,14 @@ namespace API.Controllers
             return model;
         }
 
+		[AllowAnonymous]
+		[HttpGet("get-id-khach")]
+		public UserModel GetIdKhach(string username, string password)
+		{
+			var dt = _uBusiness.GetIdKhach(username, password);
+			return dt;
+		}
+
 		[Route("search-user")]
 		[HttpPost]
 		public IActionResult Search([FromBody] Dictionary<string, object> formData)

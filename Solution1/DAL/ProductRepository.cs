@@ -52,64 +52,16 @@ namespace DAL
 				throw ex;
 			}
 		}
-		public bool CreateProduct(ProductModel model)
-		{
-			string msgError = "";
-			try
-			{
-				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError,
-				"sp_them_san_pham",
-				"@sTen", model.sTen,
-				"@sGia", model.sGia,
-				"@sAnh", model.sAnh);
 
-
-				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
-				{
-					throw new Exception(Convert.ToString(result) + msgError);
-				}
-				return true;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-		}
-		public bool UpdateProduct(ProductModel model)
+		public List<ProductModel> FilterProduct(int index)
 		{
 			string msgError = "";
 			try
 			{
-				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError,
-				"sp_sua_san_pham",
-				"@spId", model.spId,
-				"@sTen", model.sTen,
-				"@sGia", model.sGia,
-				"@sAnh", model.sAnh);
-				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
-				{
-					throw new Exception(Convert.ToString(result) + msgError);
-				}
-				return true;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-		}
-		public bool DeleteProduct(string id)
-		{
-			string msgError = "";
-			try
-			{
-				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_xoa_san_pham",
-				"@spId", id);
-				;
-				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
-				{
-					throw new Exception(Convert.ToString(result) + msgError);
-				}
-				return true;
+				var dt = _db.ExecuteSProcedure(out msgError, "sp_san_pham_tang_giam_dan", index);
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				return dt.ConvertTo<ProductModel>().ToList();
 			}
 			catch (Exception ex)
 			{

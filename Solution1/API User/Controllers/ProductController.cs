@@ -18,7 +18,7 @@ namespace API.Controllers
 		[HttpGet("get-all")]
 		public IActionResult GetAllProduct()
 		{
-			var dt = _bus.GetAllProduct().Select(x => new { x.spId, x.sTen, x.sGia, x.sAnh });
+			var dt = _bus.GetAllProduct().Select(x => new { x.spId, x.sTen, x.sGia, x.sAnh, x.sSoLuong });
 			return Ok(dt);
 		}
 
@@ -29,25 +29,26 @@ namespace API.Controllers
 			return Ok(dt);
 		}
 
-		[HttpPost("create-product")]
-		public ProductModel CreateProduct([FromBody] ProductModel model)
+		[Route("filter-product")]
+		[HttpPost]
+		public IActionResult FilterProduct([FromBody] Dictionary<string, object> formData)
 		{
-			_bus.CreateProduct(model);
-			return model;
-		}
-
-		[HttpPut("update-product")]
-		public ProductModel UpdateProduct([FromBody] ProductModel model)
-		{
-			_bus.UpdateProduct(model);
-			return model;
-		}
-
-		[HttpDelete("delete-product")]
-		public IActionResult DeleteProduct(string model)
-		{
-			_bus.DeleteProduct(model);
-			return Ok(new { message = "xoa thanh cong" });
+			try
+			{
+				var index = int.Parse(formData["index"].ToString());
+				long total = 0;
+				var data = _bus.FilterProduct(index);
+				return Ok(
+					new
+					{
+						Data = data,
+					}
+					);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 		}
 	}
 }

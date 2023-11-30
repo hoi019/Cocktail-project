@@ -25,17 +25,9 @@ namespace BLL
 		{
 			return _res.GetByIdProduct(id);
 		}
-		public bool CreateProduct(ProductModel model)
+		public List<ProductModel> FilterProduct(int index)
 		{
-			return _res.CreateProduct(model);
-		}
-		public bool UpdateProduct(ProductModel model)
-		{
-			return _res.UpdateProduct(model);
-		}
-		public bool DeleteProduct(string id)
-		{
-			return _res.DeleteProduct(id);
+			return _res.FilterProduct(index);
 		}
 	}
 }

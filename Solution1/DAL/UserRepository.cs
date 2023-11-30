@@ -103,5 +103,26 @@ namespace DAL
 			}
 		}
 
+		public UserModel GetIdKhach(string username, string password)
+		{
+			string msgError = "";
+			try
+			{
+				var data = _db.ExecuteSProcedureReturnDataTable(
+					out msgError,
+					"sp_lay_id_khach",
+					"@tTaiKhoan", username,
+					"@tMatKhau", password);
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				return data.ConvertTo<UserModel>().FirstOrDefault();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+
 	}
 }

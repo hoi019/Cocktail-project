@@ -12,5 +12,6 @@ namespace DataModel
         public string? sTen { get; set; }
         public int? sGia { get; set; }
         public string? sAnh { get; set; }
+        public int? sSoLuong { get; set; }
     }
 }

@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-	public interface IProductRespository
+	public interface IBillRepository
 	{
-		List<ProductModel> GetAllProduct();
-		ProductModel GetByIdProduct(string id);
-		List<ProductModel> FilterProduct(int index);
+		BillModel GetDatabyIDBill(int id);
+		bool CreateBill(BillModel model);
 	}
 }

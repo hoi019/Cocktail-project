@@ -29,13 +29,18 @@ builder.Services.AddCors(options =>
 			.AllowAnyHeader();
 	});
 
-});
+});	
 
 // Add services to the container.
 builder.Services.AddTransient<IDatabaseHelper, DatabaseHelper>();
 builder.Services.AddTransient<IProductRespository, ProductRepository>();
 builder.Services.AddTransient<IProductBusiness, ProductBusiness>();
-
+builder.Services.AddTransient<IAccountBusiness, AccountBusiness>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<IUserBusiness, UserBusiness>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IBillBusiness, BillBusiness>();
+builder.Services.AddTransient<IBillRepository, BillRepository>();
 
 // configure strongly typed settings objects
 IConfiguration configuration = builder.Configuration;
