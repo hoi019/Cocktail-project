@@ -10,5 +10,6 @@ namespace DAL.Interfaces
 	public interface IBillDetaislRepository
 	{
 		BillDetail GetAllByIdBill(int id);
+		bool DeleteBillDetail(string id);
 	}
 }

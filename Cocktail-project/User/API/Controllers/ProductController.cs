@@ -18,7 +18,7 @@ namespace API.Controllers
 		[HttpGet("get-all")]
 		public IActionResult GetAllProduct()
 		{
-			var dt = _bus.GetAllProduct().Select(x => new { x.spId, x.sTen, x.sGia, x.sAnh });
+			var dt = _bus.GetAllProduct().Select(x => new { x.spId, x.sTen, x.sGia, x.sAnh, x.sSoLuong });
 			return Ok(dt);
 		}
 

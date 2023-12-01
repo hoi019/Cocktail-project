@@ -61,7 +61,8 @@ namespace DAL
 				"sp_them_san_pham",
 				"@sTen", model.sTen,
 				"@sGia", model.sGia,
-				"@sAnh", model.sAnh);
+				"@sAnh", model.sAnh,
+				"@sSoLuong", model.sSoLuong);
 
 
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
@@ -85,7 +86,8 @@ namespace DAL
 				"@spId", model.spId,
 				"@sTen", model.sTen,
 				"@sGia", model.sGia,
-				"@sAnh", model.sAnh);
+				"@sAnh", model.sAnh,
+				"@sSoLuong", model.sSoLuong);
 				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
 				{
 					throw new Exception(Convert.ToString(result) + msgError);

@@ -21,5 +21,10 @@ namespace BLL
 		{
 			return _res.GetAllByIdBill(id);
 		}
+
+		public bool DeleteBillDetail(string id)
+		{
+			return _res.DeleteBillDetail(id);
+		}
 	}
 }

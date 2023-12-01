@@ -20,5 +20,12 @@ namespace API.Controllers
 		{
 			return _bus.GetAllByIdBill(id);
 		}
+
+		[HttpDelete("delete-bill-detail")]
+		public IActionResult DeleteProduct(string model)
+		{
+			_bus.DeleteBillDetail(model);
+			return Ok(new { message = "xoa thanh cong" });
+		}
 	}
 }

@@ -10,9 +10,9 @@ namespace DataModel
 	{
 		public int? hdbId { get; set; }
 		public int? kId { get; set; }
-		public string? hdbNgayLap { get; set; }
+		public DateTime? hdbNgayLap { get; set; }
         public string? hdbMoTa { get; set; }
-        public List<BillDetail> list_json_chitiethoadon { get; set; }
+        public List<BillDetail>? list_json_chitiethoadon { get; set; }
 	}
 	public class BillDetail
 	{

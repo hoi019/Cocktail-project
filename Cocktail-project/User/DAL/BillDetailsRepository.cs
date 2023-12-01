@@ -32,5 +32,25 @@ namespace DAL
 				throw ex;
 			}
 		}
+
+		public bool DeleteBillDetail(string id)
+		{
+			string msgError = "";
+			try
+			{
+				var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_xoa_chi_tiet_hoa_don",
+				"@ctbId", id);
+				;
+				if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+				{
+					throw new Exception(Convert.ToString(result) + msgError);
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
 	}
 }
