@@ -5,7 +5,7 @@ app.controller("sanpham", function ($scope, $http) {
     $scope.LoadMenu = function () {
         $http({
             method: 'GET',
-            url: current_url + '/api/Product/get-all',
+            url: 'https://localhost:44378/api/Product/get-all',
         }).then(function (response) {
             $scope.listItem = response.data;
         });

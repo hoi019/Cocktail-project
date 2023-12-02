@@ -17,7 +17,7 @@
   <title>Document</title>
 </head>
 
-<body>
+<body ng-app="AppBanHang" ng-controller="ProductDetail">
   <!-- Welcome -->
   <div class="top">
     <a href="#">Welcome to our new storefront! Have questions about your account, click here! <i
@@ -41,8 +41,9 @@
       <div class="tool__logo"><a href="main.html"><img src="./images/logo.png" alt="Anh logo thuong hieu"></a></div>
       <div class="tool__item">
         <ul>
-          <li><a href="#"><i class="fa-regular fa-user"></i></a></li>
-          <li><a href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
+          <li><a href="./login.html"><i class="fa-regular fa-user"></i></a></li>
+          <li><a href="./cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+          <li><a><i onclick="logOut()" class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
       </div>
     </div>
@@ -108,12 +109,12 @@
       <div class="iamges">
         <div class="iames-box">
           <div class="images-large">
-            <img src="../public/images/detail.jpg" alt="" class="largest">
+            <img ng-src="{{sp.sAnh}}" alt="" class="largest">
           </div>
         </div>
         <div class="images-small">
           <div class="images-small__box">
-            <img src="../public/images/detail.jpg" alt="" class="small">
+            <img src="./images/knives/c1.PNG" alt="" class="small">
           </div>
           <div class="images-small__box">
             <img src="../public/images/small1.jpg" alt="" class="small">
@@ -130,19 +131,19 @@
     <div class="righ-contents">
       <div class="contents">
         <h5>KIT-ESSN-SET-ST</h5>
-        <h1>ESSENTIAL COCKTAIL SET</h1>
+        <h1>{{sp.sTen}}</h1>
         <h3>STAINLESS STEEL</h3>
         <p>Regular priceManufacturer Suggested Retail Price: $129.99 USD
         </p>
-        <h6 class="cost">$113.44 USD</h6>
+        <h6 class="cost">{{sp.sGia}} USD</h6>
         <p><small>Quantity</small></p>
         <div class="quantity">
-          <div class="quan minus">-</div>
-          <div class="quan number">0</div>
-          <div class="quan plus">+</div>
+          <div class="quan minus" onclick="decrease()">-</div>
+          <div class="quan number">{{sp.sSoLuong}}</div>
+          <div class="quan plus" onclick="increase()">+</div>
         </div>
         <div class="box-cart">
-          <button class="box-button add">Add to cart</button>
+          <button class="box-button add" ng-click="handleAddToCartClick()">Add to cart</button>
         </div>
         <div class="box-cart">
           <button class="box-button buy">Buy it now?</button>
@@ -155,7 +156,6 @@
       </div>
     </div>
   </div>
-
   <div class="relation">
     <!-- div2 -->
     <div class="second">
@@ -218,7 +218,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- footer -->
@@ -274,7 +273,33 @@
     </div>
   </div>
 
-  <script src="../source/script/detail.js"></script>
+  <script>
+    let count = 1;
+
+    const display = () => {
+      document.querySelector('.number').textContent = count;
+    };
+
+    const increase = () => {
+      count += 1;
+      display();
+    };
+
+    const decrease = () => {
+      if (count >= 1) {
+        count -= 1;
+      }
+      display();
+    };
+    
+    const logOut = () => {
+      localStorage.clear();
+      if(confirm("Bạn có muốn thoát không?")) {
+        window.location.href = 'login.html';
+      }
+    }
+
+  </script>
 </body>
 
 </html>

@@ -33,7 +33,6 @@ namespace DAL
 				throw ex;
 			}
 		}
-
 		public BillModel GetDatabyIDBill(int id)
 		{
 			string msgError = "";
@@ -151,6 +150,46 @@ namespace DAL
 					"@page_index", pageIndex,
 					"@page_size", pageSize,
 					"@ten", ten);
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+				return dt.ConvertTo<BillModel>().ToList();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		public List<BillFromMonth> SearchByMonth(int month, out long total)
+		{
+			string msgError = "";
+			total = 0;
+			try
+			{
+				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_thong_ke_hoa_don",
+					"@month", month);
+				if (!string.IsNullOrEmpty(msgError))
+					throw new Exception(msgError);
+				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+				return dt.ConvertTo<BillFromMonth>().ToList();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+		public List<BillModel> SearchBillByMonth(int pageIndex, int pageSize, DateTime? fr_NgayTao, DateTime? to_NgayTao, out long total)
+		{
+			string msgError = "";
+			total = 0;
+			try
+			{
+				var dt = _db.ExecuteSProcedureReturnDataTable(out msgError, "sp_thong_ke_hoa_don",
+					"@page_index", pageIndex,
+					"@page_size", pageSize,
+					"@fr_NgayTao", fr_NgayTao,
+					"@to_NgayTao", to_NgayTao);
 				if (!string.IsNullOrEmpty(msgError))
 					throw new Exception(msgError);
 				if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];

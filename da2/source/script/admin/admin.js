@@ -1,3 +1,15 @@
+var user = JSON.parse(localStorage.getItem("account"));
+if (!user) {
+  window.location.href = "./login.html";
+}
+
+const logOut = () => {
+  if(confirm("Bạn có muốn thoát không?")) {
+    localStorage.clear();
+    window.location.href = 'login.html';
+  }
+}
+
 // window.onload = function() {
 //   if (window.jQuery) {  
 //       // jQuery is loaded  

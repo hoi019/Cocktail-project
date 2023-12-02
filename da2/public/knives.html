@@ -30,8 +30,9 @@
         <div class="tool__logo"><a href="main.html"><img src="./images/logo.png" alt="Anh logo thuong hieu"></a></div>
         <div class="tool__item">
           <ul>
-            <li><a href="#"><i class="fa-regular fa-user"></i></a></li>
-            <li><a href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="./login.html"><i class="fa-regular fa-user"></i></a></li>
+            <li><a href="./cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a><i onclick="logOut()" class="fa-solid fa-right-from-bracket"></i></a></li>
           </ul>
         </div>
       </div>
@@ -100,21 +101,23 @@
             <li>
               <p>Filter:</p>
             </li>
-            <li><a href="">Finish</a><i class="fa-solid fa-chevron-down"></i></li>
-            <li><a href="">Price</a><i class="fa-solid fa-chevron-down"></i></li>
-            <li><a href="">Brand</a><i class="fa-solid fa-chevron-down"></i></li>
+            <li><a ng-click="arrangeDecrease()" href="">Decrease</a><i class="fa-solid fa-chevron-down"></i></li>
+            <li><a ng-click="arrangeIncrease()" href="">Increase</a><i class="fa-solid fa-chevron-down"></i></li>
+            <li><a ng-click="arrangeLow()" href="">Lower 1.000.000</a><i class="fa-solid fa-chevron-down"></i></li>
+            <li><a ng-click="arrangeMedium()" href="">1.000.000 to 5.000.000</a><i class="fa-solid fa-chevron-down"></i></li>
+            <li><a ng-click="arrangeHigh()" href="">Higher 5.000.000</a><i class="fa-solid fa-chevron-down"></i></li>
           </ul>
         </div>
         <div class="kit-nav__right">
-          <ul>
+          <!-- <ul>
             <li>
               <p>Sort by:</p>
             </li>
             <li><a>Featured</a><i class="fa-solid fa-chevron-down"></i></li>
             <li>
               <p class="item-total"></p>
-            </li> <!-- tong san pham se hien thi -->
-          </ul>
+            </li>
+          </ul> -->
         </div>
       </div>
   
@@ -123,21 +126,25 @@
       <div id="kit-box">
         <div ng-repeat="x in listItem" class="product-box">
           <div class="product-img">
-            <img src="{{x.sAnh}}" class="product-img__img" alt="">
-            <img src="./images/tool and kits/c1-into.PNG" alt="" class="product-img__img">
+            <a href="./detail.html?id={{x.spId}}">
+              <img src="{{x.sAnh}}" class="product-img__img" alt="">
+              <img src="./images/tool and kits/c1-into.PNG" alt="" class="product-img__img">
+            </a>
           </div>
           <div class="product-form">
             <h1>{{x.sTen}}</h1>
             <p>Read</p>
             <span>{{x.sGia}}</span>
+            <span style="display: none;">{{x.sSoLuong}}</span>
             <div class="shop-cart">
-              <a href="">Add to cart</a>
+              <a ng-click="handleAddToCartClick(x)">Add to cart</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   
+    
     <!-- footer -->
     <div class="footer">
       <div class="footer__f-child">
@@ -190,6 +197,14 @@
         <p><small>© 2023, Cocktail Kingdom Powered by Shopify</small></p>
       </div>
     </div>
+    <script>
+      const logOut = () => {
+        localStorage.clear();
+        if(confirm("Bạn có muốn thoát không?")) {
+        window.location.href = 'login.html';
+      }
+      }
+    </script>
 </body>
 
 </html>

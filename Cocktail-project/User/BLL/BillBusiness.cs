@@ -46,5 +46,13 @@ namespace BLL
 		{
 			return _res.StatisticsUser(pageIndex, pageSize, out total, ten_khach, fr_NgayTao, to_NgayTao);
 		}
+		public List<BillFromMonth> SearchByMonth(int month, out long total)
+		{
+			return _res.SearchByMonth(month, out total);
+		}
+		public List<BillModel> SearchBillByMonth(int pageIndex, int pageSize, DateTime? fr_NgayTao, DateTime? to_NgayTao, out long total)
+		{
+			return _res.SearchBillByMonth(pageIndex, pageSize, fr_NgayTao, to_NgayTao, out total);
+		}
 	}
 }

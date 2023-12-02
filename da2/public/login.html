@@ -10,9 +10,13 @@
   <link rel="stylesheet" href="../source/stylesheet/root.css">
   <link rel="stylesheet" href="../source/stylesheet/main.css">
   <link rel="stylesheet" href="../source/stylesheet/login.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script src="./angular/angularjs.js"></script>c
+  <script src="./js/login.js"></script>
 </head>
 
-<body>
+<body ng-app="AppBanHang" ng-controller="LoginCtrl">
   <!-- Welcome -->
   <div class="top">
     <a href="#">Welcome to our new storefront! Have questions about your account, click here! <i
@@ -89,29 +93,29 @@
     <div class="tittle">
       <h1>Login</h1>
     </div>
-    <div class="take-infor">
-      <div class="take__username">
-        <input type="text" placeholder="Email">
+    <form action="" id="form__login">
+      <div class="take-infor">
+        <div class="take__username">
+          <input ng-model="tTaiKhoan" name="username" type="text" placeholder="UserName">
+        </div>
+        <div class="take__password">
+          <input ng-model="tMatKhau" name="password" type="password" placeholder="Password">
+        </div>
       </div>
-      <div class="take__password">
-        <input type="text" placeholder="Password">
+      <div class="forget-password">
+        <div class="password-child">
+          <a href="#">Forgot your password?</a>
+        </div>
       </div>
-    </div>
-    <div class="forget-password">
-      <div class="password-child">
-        <a href="#">Forgot your password?</a>
+      <div class="enter">
+        <div class="btn" ng-click="login()">Sign in</div>
       </div>
-    </div>
-    <div class="sign-box">
-      <div class="sign-in">
-        <a href="main.html">Sign in</a>
+      <div class="regiter-box">
+        <div class="regiter-enter">
+          <a href="register.html">Create account</a>
+        </div>
       </div>
-    </div>
-    <div class="regiter-box">
-      <div class="regiter-enter">
-        <a href="register.html">Create account</a>
-      </div>
-    </div>
+    </form>
   </div>
 
   <!-- footer -->
@@ -167,6 +171,54 @@
     </div>
   </div>
 
+  <!-- <script>
+    const form = document.forms["form__login"];
+    const btnLg = document.querySelector(".sign-in");
+    
+    var app = angular.module("AppBanHang", []);
+    app.controller("HomeLogin", function ($scope, $http) {
+      $scope.listAccount = [];
+
+      $scope.Account = function (data) {
+        $http({
+          method: "POST",
+          data,
+          url: "https://localhost:44378/api/Account/login",
+        }).then(function (response) {
+          var userAccount = response.data;
+          var cartKey = "cart_" + userAccount.username;
+
+          $scope.cartItems = JSON.parse(localStorage.getItem(cartKey)) || [];
+          localStorage.setItem(cartKey, JSON.stringify($scope.cartItems));
+          
+          location.assign("../public/main.html");
+        }), function () {
+						alert('Tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại!');
+					};
+      };
+
+      function handleForm() {
+        btnLg.onclick = function () {
+          var username = form.elements.username.value;
+          var password = form.elements.password.value;
+          if (username === "" || password === "") {
+            alert("Bạn chưa nhập đủ thông tin tài khoản!");
+            return;
+          }
+          var formData = {
+            username,
+            password,
+          };
+          $scope.Account(formData);
+        };
+
+        form.onsubmit = (e) => {
+          e.preventDefault();
+        };
+      }
+      handleForm();
+    });
+  </script> -->
 </body>
 
 </html>

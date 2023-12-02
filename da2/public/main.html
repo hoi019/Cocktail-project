@@ -36,8 +36,9 @@
       <div class="tool__logo"><a href="main.html"><img src="./images/logo.png" alt="Anh logo thuong hieu"></a></div>
       <div class="tool__item">
         <ul>
-          <li><a href="#"><i class="fa-regular fa-user"></i></a></li>
+          <li><a href="./login.html"><i class="fa-regular fa-user"></i></a></li>
           <li><a href="./cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+          <li><a><i onclick="logOut()" class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
       </div>
     </div>
@@ -283,7 +284,14 @@
     </div>
   </div>
   <script src="../source/script/main.js"></script>
-
+  <script>
+    const logOut = () => {
+      localStorage.clear();
+      if(confirm("Bạn có muốn thoát không?")) {
+        window.location.href = 'login.html';
+      }
+    }
+  </script>
 </body>
 
 </html>

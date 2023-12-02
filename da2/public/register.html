@@ -10,9 +10,11 @@
   <link rel="stylesheet" href="../source/stylesheet/root.css">
   <link rel="stylesheet" href="../source/stylesheet/main.css">
   <link rel="stylesheet" href="../source/stylesheet/register.css">
+  <script src="./angular/angularjs.js"></script>
+  <script src="./js/register.js"></script>
 </head>
 
-<body>
+<body ng-app="AppBanHang" ng-controller="MainCtrl">
   <!-- Welcome -->
   <div class="top">
     <a href="#">Welcome to our new storefront! Have questions about your account, click here! <i
@@ -87,12 +89,17 @@
   <!-- register -->
   <div class="register">
     <h1>Create account</h1>
-    <div class="first-name"><input type="text" placeholder="First name"></div>
-    <div class="last-name"><input type="text" placeholder="Last name"></div>
-    <div class="email"><input type="text" placeholder="Email"></div>
-    <div class="password"><input type="text" placeholder="Password"></div>
+    <div class="Fullname"><input name="kTen" type="text" placeholder="Fullname" ng-model="kTen"></div>
+    <div class="Fullname"><input name="tTaiKhoan" type="text" placeholder="Username" ng-model="tTaiKhoan"></div>
+    <div class="password"><input name="tMatKhau" type="password" placeholder="Password" ng-model="tMatKhau"></div>
+    <div class="password"><input name="tMatKhauLai" type="password" placeholder="Password again" ng-model="tMatKhauLai"></div>
     <div class="enter">
-      <a href="login.html">Create</a>
+      <button ng-click="register()">Create</button>
+    </div>
+    <div class="regiter-box">
+      <div class="regiter-enter">
+        <a href="login.html">Already have an account</a>
+      </div>
     </div>
   </div>
 

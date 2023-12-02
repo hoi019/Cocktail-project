@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css">
 	<link rel="stylesheet" href="../../source/stylesheet/root.css">
 	<link rel="stylesheet" href="../../source/stylesheet/admin/admin.css">
-
 	<script src="../angular/angularjs.js"></script>
 	<script src="../../source/script/admin/admin.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -59,6 +58,12 @@
 					<span class="text">Receipts</span>
 				</a>
 			</li>
+			<li>
+				<a href="./statistical.html">
+					<i class="fa-solid fa-chart-simple"></i>
+					<span class="text">Statistical</span>
+				</a>
+			</li>
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -68,9 +73,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="../login.html" class="logout">
+				<a href="./login.html" class="logout">
 					<i class="fa-solid fa-right-from-bracket"></i>
-					<span class="text">Logout</span>
+					<span onclick="logOut()" class="text">Logout</span>
 				</a>
 			</li>
 		</ul>
@@ -82,9 +87,9 @@
 			<i class="fa-solid fa-bars"></i>
 			<a href="#" class="nav-link">Categories</a>
 			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+				<div class="form-input" style="width: 400px;">
+					<input ng-model="TextSearch" type="search" placeholder="Search..." >
+					<button ng-click="SearchByhdbMoTa()" type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</div>
 			</form>
 			<input type="checkbox" id="switch-mode" hidden>
@@ -116,12 +121,12 @@
 				</div>
 				<div class="submit">
 					<div class="submit__button">
-						<button ng-click="Edit($x.spId)">Lưu</button>
+						<button ng-click="Edit(x.spId)">Lưu</button>
 					</div>
 				</div>
 				<div class="section__parents-button">
 					<div class="section__button">
-						<button ng-click="Add()" type="submit">{{ButtonText}}</button>
+						<button ng-click="Add()" type="submit">Thêm</button>
 					</div>
 					<!-- <div class="section__button">
 						<button>Sửa</button>
@@ -144,7 +149,8 @@
 				<div class="section-big-parents border-right">
 					<div class="section__parents-label">
 						<div class="section__box">
-							<input id="spId" name="spId" class="section__input" type="hidden" ng-model="spId"><br>
+							<label for="">Nhập mã sản phẩm:</label><br>
+							<input id="spId" name="spId" class="section__input" type="text" ng-model="spId"><br>
 						</div>
 						<div class="section__box">
 							<label for="">Nhập tên sản phẩm:</label><br>
@@ -153,6 +159,12 @@
 						<div class="section__box">
 							<label for="">Nhập giá sản phẩm:</label><br>
 							<input id="sGia" name="sGia" class="section__input" type="number" ng-model="sGia"><br>
+						</div>
+					</div>
+					<div class="section__parents-label">
+						<div class="section__box">
+							<label for="">Nhập số lượng:</label><br>
+							<input id="sSoLuong" name="sSoLuong" class="section__input" type="text" ng-model="sSoLuong"><br>
 						</div>
 						<div class="section__box">
 							<label for="">Nhập hình ảnh:</label><br>
@@ -167,37 +179,27 @@
 						<th class="colum-title one">Mã sản phẩm</th>
 						<th class="colum-title">Tên sản phẩm</th>
 						<th class="colum-title">Giá sản phẩm</th>
-						<th class="colum-title second">Hình ảnh</th>
+						<th class="colum-title">Số lượng</th>
+						<th class="colum-title">Hình ảnh</th>
+						<th class="colum-title second">Chức năng</th>
 					</tr>
-					<tr ng-repeat="x in listProduct" class="colum-content-box">
+					<tr ng-repeat="x in listProduct.data" class="colum-content-box">
 						<th class="colum-content">{{x.spId}}</th>
 						<th class="colum-content">{{x.sTen}}</th>
 						<th class="colum-content">{{x.sGia}}</th>
-						<th class="colum-content"><img ng-src="{{'.' + x.sAnh}}" class="th-img" alt="" srcset="">
+						<th class="colum-content">{{x.sSoLuong}}</th>
+						<th class="colum-content"><img ng-src="{{'.' + x.sAnh}}" class="th-img" alt="" srcset=""></th>
+						<th class="colum-content">
 							<!-- nut Sua -->
 							<i id="Edit" onclick="editClick()" class="fa-regular fa-pen-to-square"></i>
 							<!-- nut Xoa -->
 							<i id="Delete" ng-click="Delete(x.spId)" class="fa-solid fa-trash-can"></i>
-							<!-- <i id="Update" ng-show="x.EditMode" ng-click="Update($index)" class="fa-solid fa-check"></i>
-							nut V
-							<i id="Cancel" ng-show="x.EditMode" ng-click="Cancel($index)" class="fa-solid fa-xmark"></i>
-							nut X -->
 						</th>
 					</tr>
 
 				</table>
 
-				<div class="pagination">
-					<!-- <li class="page-item previous-page"><a href="#" class="page-link">Prev</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">1</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">2</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">3</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">4</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">5</a></li>
-					<li class="page-item dot"><a href="#" class="page-link">...</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">10</a></li>
-					<li class="page-item next-page"><a href="#" class="page-link">Next</a></li> -->
-				</div>
+				<div class="navigation"></div>
 			</div>
 		</main>
 	</section>
@@ -205,54 +207,37 @@
 	<script>
 		const showEdit = () => {
 			var edit = document.querySelector('.submit');
-			edit.classList.toggle('show-button-edit')
+			edit.classList.add('show-button-edit');
 		}
-		const disableEdit = () => {
-			var edit = document.querySelector('.submit');
-			edit.classList.remove('show-button-edit')
-		} 
 		
 		const editClick = () => {
+			showEdit();
 			var table = document.getElementById('table');    
 			for(var i = 1; i < table.rows.length; i++)
 			{
-					table.rows[i].onclick = function()
-					{
-								//rIndex = this.rowIndex;
-								document.getElementById("sTen").value = this.cells[1].innerHTML;
-								document.getElementById("sGia").value = this.cells[2].innerHTML;
-								document.getElementById("sAnh").value = this.cells[3].innerHTML;
-					};
+				table.rows[i].onclick = function()
+				{
+					//rIndex = this.rowIndex;
+					document.getElementById("spId").value = this.cells[0].innerHTML;
+					document.getElementById("sTen").value = this.cells[1].innerHTML;
+					document.getElementById("sGia").value = this.cells[2].innerHTML;
+					document.getElementById("sSoLuong").value = this.cells[3].innerHTML;
+					document.getElementById("sAnh").value = this.cells[4].innerHTML;
+				};
 			}
-			showEdit();
 		}
 
 		var app = angular.module('AppBanHang', [])
 		app.controller('MainCtrl', function ($scope, $http, $window) {
-			$scope.ButtonText = 'Thêm';
-			//Getting records from database.
 			$scope.listProduct = [];
 
-			$scope.Load = () => {
-				$http({
-					method: "GET",
-					url: 'https://localhost:44390/api/Product/get-all',
-					dataType: 'json',
-					headers: { "Content-Type": "application/json" }
-				}).then(function (response) {
-					//The received response is saved in listProduct array.
-					$scope.listProduct = response.data;
-				});
-			};
-			$scope.Load();
-
-
-			//Adding new record to database.
 			$scope.Add = () => {
 				const obj = {
 					"sTen": $scope.sTen,
 					"sGia": Number($scope.sGia),
-					"sAnh": $scope.sAnh}
+					"sAnh": $scope.sAnh,
+					"sSoLuong": $scope.sSoLuong
+				}
 				$http({
 					method: "POST",
 					url: "https://localhost:44390/api/Product/create-product",
@@ -260,69 +245,101 @@
 					dataType: 'json',
 					headers: { "Content-Type": "application/json" }
 				}).then(function (response) {
-					//The newly inserted record is inserted into the Customers array.
 					$scope.listProduct.push(response.data);
 					location.reload();
 				}), function () {
 					alert('Không thể thêm sản phẩm. Vui lòng thử lại!')
 				};
-				reset();
+			};
+
+			$scope.Edit = function (spId) {
+				const obj = {
+						"spId": $scope.spId,
+						"sTen": $scope.sTen,
+						"sGia": Number($scope.sGia),
+						"sAnh": $scope.sAnh,
+						"sSoLuong": $scope.sSoLuong
+				};
+				$http({
+						method: "PUT",
+						url: "https://localhost:44390/api/Product/update-product",
+						data: obj,
+						dataType: 'json',
+						headers: { "Content-Type": "application/json" }
+				}).then(function (response) {
+						alert('Sản phẩm đã được cập nhật thành công');
+						$scope.listProduct[$scope.editIndex] = response.data;
+						location.reload();
+					}, function () {
+						alert('Không thể cập nhật sản phẩm. Vui lòng thử lại!');
+					});
 			};
 
 
-			$scope.Edit = function (data) {
-        console.log('update');
-				var product = $scope.listProduct[index];
-        $http({
-					method: "PUT",
-					url: "https://localhost:44390/api/Product/update-product",
-					data: obj,
-					dataType: 'json',
-					headers: { "Content-Type": "application/json" }
-        }).then(function (response) {
-            alert('Bạn sửa khóa học thành công');
-						$scope.listProduct[$scope.editIndex] = response.data;
-
-						reset();
-
-						$scope.editIndex = null;
-
-            location.reload();
-        });
-				disableEdit();
-    	};
-
-			//Deleting an existing record from database.
 			$scope.Delete = function (spId) {
-				if ($window.confirm("Do you want to delete this row?")) {
-					var obj = {
-						"sTen": $scope.sTen,
-						"sGia": Number($scope.sGia),
-						"sAnh": $scope.sAnh};
-					obj.spId = spId;
+				if(confirm('Bạn có muốn xoá không?'))
+				{
 					$http({
 						method: "DELETE",
-						url: "https://localhost:44390/api/Product/delete-product",
-						data: JSON.stringify(obj),
+						url: 'https://localhost:44390/api/Product/delete-product?model=' + spId,
 						dataType: 'json',
 						headers: { "Content-Type": "application/json" }
-					});
-					post.success(function (response) {
-						//Remove the Deleted record from the Customers Array.
-						$scope.listProduct.splice
-						
-					});
-					post.error(function (response, status) {
-						$window.alert(data.Message);
+					}).then(function () {
+						$scope.Search({
+							page: pageIndex,
+							pageSize: 6
+						})
+						alert('Sản phẩm đã được xóa thành công');
+					}, function () {
+						alert('Không thể xóa sản phẩm. Vui lòng thử lại!');
 					});
 				}
 			};
 
-			$scope.reset = () => {
-				$scope.sTen = "";
-				$scope.sGia = "";
-				$scope.sAnh = "";
+			let pageIndex = 1;
+			$scope.Search = function (data) {
+				$http({
+					method: 'POST',
+					data,
+					url: 'https://localhost:44390/api/Product/search-product',
+				}).then(function (response) {
+					$scope.listProduct = response.data;
+					var total = Number(response.data.totalItems);
+					reload(total);
+				});
+			};
+
+			$scope.Search({
+				page: pageIndex,
+				pageSize: 6
+			})
+
+			$scope.SearchByhdbMoTa = function() {
+				$scope.Search({
+					page: pageIndex,
+					pageSize: 6,
+					ten: $scope.TextSearch
+				})
 			}
+
+			function reload(total) {
+				const totalPages = Math.ceil(total / 6);
+				document.querySelector('.navigation').innerHTML = '';
+				for (let index = 0; index < totalPages; index++) {
+					document.querySelector('.navigation').innerHTML += 
+					`<button data-id="${index + 1}" class="btn-primary">${index + 1}</button>`;
+				}
+				const btnNavigation = document.querySelectorAll('button[data-id]');
+				console.log(btnNavigation);
+				btnNavigation.forEach((item) => (
+					item.onclick = () =>
+						$scope.Search({
+							page: item.dataset.id,
+							pageSize: 6,
+						})),
+				);
+			}
+			
 		});
 	</script>
 </body>

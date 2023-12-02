@@ -1,34 +1,39 @@
-// const minus = document.querySelector('.minus');
-// const plus = document.querySelector('.plus');
-// const current = document.querySelector('.number');
-// var count = 0;
+var app = angular.module("AppBanHang", []);
+app.controller("ProductDetail", function ($scope, $http, $window) {
+  $scope.sp;
 
-// plus.addEventListener('click', () => {
-//   if (count => 0) {
-//     count = count + 1;
-//     current.innerHTML = count
-//   }
-// })
+  $scope.handleAddToCartClick = function () {
+    $scope.addToCart($scope.sp);
+  };
 
-// minus.addEventListener('click', () => {
-//   if (count > 0) {
-//     count = count - 1;
-//     current.innerHTML = count
-//   }
-// })
+  
+  $scope.load = function () {
+    var urlObject = new URL(window.location.href); // tao doi tuong url
+    var id = urlObject.searchParams.get("id");
+    $http({
+      method: "GET",
+      url:'https://localhost:44378/api/Product/get-by-id?id='+id,
+    }).then(function (response) {
+      $scope.sp = response.data;
+    });
+  };
+  $scope.load();
 
 
-// var app = angular.module('AppBanHang', []);
-// app.controller("ChiTietCtrl", function ($scope, $http) {
-//   $scope.sanpham;
-//   $scope.GetSanPham = function () {
-//     $http({
-//       method: 'GET',
-//       url: current_url + '/api-admin/Product/get-all',
-//     }).then(function (response) {
-//       debugger;
-//       $scope.sanpham = response.data;
-//     });
-//   };
-//   $scope.GetSanPham();
-// });
+  // Hàm chung để thêm sản phẩm vào giỏ hàng
+  $scope.addToCart = function (item) {
+    var i = JSON.parse(localStorage.getItem('cart')) || []
+    console.log(i);
+    i.push(item)
+    localStorage.setItem("cart", JSON.stringify(i));
+    
+    alert("Đã thêm vào giỏ hàng thành công!");
+    var confirmAddToCart = confirm("Bạn có muốn đến giỏ hàng không?");
+
+    if (confirmAddToCart) {
+      $window.location.replace("/public/cart.html");
+    } else {
+
+    }
+  };
+});

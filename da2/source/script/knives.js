@@ -1,18 +1,74 @@
 var app = angular.module('AppBanHang', []);
 app.controller("sanpham", function ($scope, $http) {
-    $scope.listItem = [];
+    $scope.handleAddToCartClick = function (item) {
+        $scope.addToCart(item);
+    };
 
     $scope.LoadMenu = function () {
         $http({
             method: 'GET',
-            url: current_url + '/api/Product/get-all',
+            url: 'https://localhost:44378/api/Product/get-all',
         }).then(function (response) {
             $scope.listItem = response.data;
         });
     };
-    console.log($scope.listItem);
     $scope.LoadMenu();
+
+
+    $scope.addToCart = function (item) {
+        var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        console.log(cartItems);
+        cartItems.push(item);
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+        alert('Đã thêm vào giỏ hàng thành công!');
+    };
+
+    $scope.arrangeIncrease = function () {
+        $http({
+            method: 'GET',
+            url: 'https://localhost:44378/api/Product/get-all-filter-increase',
+        }).then(function (response) {
+            $scope.listItem = response.data;
+        });
+    }
+    $scope.arrangeDecrease = function () {
+        $http({
+            method: 'GET',
+            url: 'https://localhost:44378/api/Product/get-all-filter-decrease',
+        }).then(function (response) {
+            $scope.listItem = response.data;
+        });
+    }
+    $scope.arrangeLow = function () {
+        $http({
+            method: 'GET',
+            url: 'https://localhost:44378/api/Product/get-all-filter-low',
+        }).then(function (response) {
+            $scope.listItem = response.data;
+        });
+    }
+    $scope.arrangeMedium = function () {
+        $http({
+            method: 'GET',
+            url: 'https://localhost:44378/api/Product/get-all-filter-medium',
+        }).then(function (response) {
+            $scope.listItem = response.data;
+        });
+    }
+    $scope.arrangeHigh = function () {
+        $http({
+            method: 'GET',
+            url: 'https://localhost:44378/api/Product/get-all-filter-high',
+        }).then(function (response) {
+            $scope.listItem = response.data;
+        });
+    }
 });
+
+
+
+
+
 
 // let productKnive = [
 //   {

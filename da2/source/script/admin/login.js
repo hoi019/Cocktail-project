@@ -1,38 +1,40 @@
-// Khởi tạo các biến
-let user = "";
-let password = "";
-const url = "https://localhost:44390"; // Thay URL_CUA_BAN bằng URL của API của bạn
+const form = document.forms["form__login"];
+const btnLg = document.querySelector(".sign-in");
 
-// Lấy đối tượng lịch sử (history)
-const history = window.history;
+var app = angular.module("AppBanHang", []);
+app.controller("HomeLogin", function ($scope, $http) {
+  $scope.listAccount = [];
 
-// Xử lý kiểm tra nếu có thông tin người dùng trong localStorage
-if (localStorage.getItem("user-info")) {
-  history.pushState("/add");
-}
-
-// Định nghĩa hàm login
-async function login() {
-  console.warn(user, password);
-  const item = { user, password };
-  
-  try {
-    let result = await fetch(url + "/api/Account/login", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": 'application/json'
-      },
-      body: JSON.stringify(item) // Sửa từ JSON.string(item) thành JSON.stringify(item)
+  $scope.Account = function (data) {
+    $http({
+      method: "POST",
+      data,
+      url: "https://localhost:44390/api/Account/login",
+    }).then(function (response) {
+      // localStorage.setItem("account", JSON.stringify(response.data));
+      location.assign("./admin.html");
     });
-    
-    if (result.ok) {
-      const data = await result.json();
-      // Xử lý dữ liệu trả về ở đây
-    } else {
-      console.error("Lỗi trong quá trình gửi yêu cầu.");
-    }
-  } catch (error) {
-    console.error("Lỗi trong quá trình gửi yêu cầu: " + error);
+  };
+
+  function handleForm() {
+    btnLg.onclick = function () {
+      var username = form.elements.username.value;
+      var password = form.elements.password.value;
+      if (username === "" || password === "") {
+        alert("Bạn chưa nhập đủ thông tin tài khoản!");
+        return;
+      }
+      var formData = {
+        username,
+        password,
+      };
+      $scope.Account(formData);
+    };
+
+    // Ngăn chặn sự kiện mặc định của form
+    form.onsubmit = (e) => {
+      e.preventDefault();
+    };
   }
-}
+  handleForm();
+});

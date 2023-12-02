@@ -1,20 +1,15 @@
 .container-box {
   padding: 40px 100px 80px 120px;
-  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
-.table-box{
-
-}
-.border-right {
-
-}
 .colum{
-  background-color: orange;
+  background-color: var(--dark);
   border: 1px solid black;
 }
 .colum-title{
   padding: 10px 75px;
+  color: var(--white);
 }
 .colum-content{
   border-left: 1px solid black;
@@ -28,19 +23,20 @@
 }
 input {
   width: 50px;
-    height: 40px;
-    font-size: 20px;
-    text-align: center;
-    padding-left: 14px;
+  height: 40px;
+  font-size: 20px;
+  text-align: center;
+  padding-left: 14px;
 }
-.fa-minus .fa-plus {
+.fa-solid {
   cursor: pointer;
 }
+
 .fa-plus {
-  padding-left: 10px;
+  padding-left: 25px;
 }
 .fa-minus {
-  padding-right: 10px;
+  padding-right: 25px;
 }
 
 .bottom-content {
@@ -54,12 +50,12 @@ input {
   position: relative;
   margin-top: 30px;
 }
-.button-cart li {
+/* .button-cart li {
   list-style: none;
   right: 75px;
   position: absolute;
   font-size: 20px;
-}
+} */
 .button-cart button {
   position: absolute;
   right: 75px;
@@ -71,4 +67,12 @@ input {
 .button-cart button:hover {
   background-color: orange;
   cursor: pointer;
+}
+.cart-quantity, .cart-total {
+  position: relative;
+  padding: 35px 0;
+  right: 0;
+}
+.quantity, .total {
+  font-size: 20px;
 }

@@ -558,3 +558,19 @@
 i.fa-solid.fa-chevron-down {
   margin-left: 5px;
 }
+.fa-right-from-bracket:hover {
+  cursor: pointer;
+}
+.fa-right-from-bracket:hover {
+  cursor: pointer;
+}
+.select-card {
+  padding: 7px 17px;
+  border-radius: 17px;
+  position: absolute;
+  right: 0;
+  width: 255px;
+}
+.select-label {
+  width: 255px;
+}

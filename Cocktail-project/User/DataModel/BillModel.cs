@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
+	public class BillFromMonth
+	{
+		public int? hdbId { get; set; }
+	}
 	public class BillModel
 	{
 		public int? hdbId { get; set; }

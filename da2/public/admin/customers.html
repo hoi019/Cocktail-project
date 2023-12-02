@@ -7,12 +7,10 @@
 	<link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css">
 	<link rel="stylesheet" href="../../source/stylesheet/root.css">
 	<link rel="stylesheet" href="../../source/stylesheet/admin/admin.css">
-
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 	crossorigin="anonymous"></script>
 	<script src="../../source/script/admin/admin.js"></script>
 	<script src="../angular/angularjs.js"></script>
-	<script src="../../source/script/admin/connect.js"></script>
 	<title>Document</title>
 </head>
 
@@ -59,6 +57,12 @@
 					<span class="text">Receipts</span>
 				</a>
 			</li>
+			<li>
+				<a href="./statistical.html">
+					<i class="fa-solid fa-chart-simple"></i>
+					<span class="text">Statistical</span>
+				</a>
+			</li>
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -68,9 +72,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="../login.html" class="logout">
+				<a href="./login.html" class="logout">
 					<i class="fa-solid fa-right-from-bracket"></i>
-					<span class="text">Logout</span>
+					<span onclick="logOut()" class="text">Logout</span>
 				</a>
 			</li>
 		</ul>
@@ -83,9 +87,9 @@
 			<i class="fa-solid fa-bars"></i>
 			<a href="#" class="nav-link">Categories</a>
 			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+				<div class="form-input" style="width: 400px;">
+					<input ng-model="TextSearch" type="search" placeholder="Search..." >
+					<button ng-click="SearchByhdbMoTa()" type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</div>
 			</form>
 			<input type="checkbox" id="switch-mode" hidden>
@@ -117,13 +121,13 @@
 				</div>
 				<div class="submit">
 					<div class="submit__button">
-						<button>Lưu</button>
+						<button ng-click="Edit($x.tId)">Lưu</button>
 					</div>
 				</div>
 				<div class="section__parents-button">
-					<div class="section__button">
-						<button>Thêm</button>
-					</div>
+					<!-- <div class="section__button">
+						<button ng-click="Add()" type="submit">Thêm</button>
+					</div> -->
 					<!-- <div class="section__button">
 						<button>Sửa</button>
 					</div>
@@ -137,79 +141,102 @@
 				</a>
 			</div>
 
-
 			<!-- RIGHT CONTENT -->
 			<!-- ENTER CONTENT -->
 			<div class="right-section">
-				<form>
-					<div class="section-big-parents border-right">
-						<div class="section__parents-label">
-							<div class="section__box">
-								<label for="">Nhập mã khách hàng:</label><br>
-								<input class="section__input" type="text"><br>
-							</div>
-							<div class="section__box">
-								<label for="">Nhập mã tài khoản:</label><br>
-								<input class="section__input" type="text"><br>
-							</div>
-							<div class="section__box">
-								<label for="">Nhập tên khách hàng:</label><br>
-								<input class="section__input" type="text"><br>
-							</div>
-						</div>
-						<div class="section__parents-label">
-							<div class="section__box">
-								<label for="">Nhập số điện thoại:</label><br>
-								<input class="section__input" type="text"><br>
-							</div>
-							<div class="section__box">
-								<label for="">Nhập địa chỉ:</label><br>
-								<input class="section__input" type="text"><br>
-							</div>
-							<div class="section__box">
-								<label for="">Nhập email:</label><br>
-								<input class="section__input" type="text"><br>
-							</div>
-						</div>
-					</div>
-				</form>
-
 				<!-- TABLE CONTENT -->
-				<table class="table-box border-right table-content-box">
+				<table id="table" class="table-box border-right table-content-box">
 					<tr class="colum">
-						<th class="colum-title one">Mã hd</th>
-						<th class="colum-title">Mã tk</th>
-						<th class="colum-title">Tên</th>
-						<th class="colum-title">Sdt</th>
-						<th class="colum-title">Địa chỉ</th>
-						<th class="colum-title second">Email</th>
+						<th class="colum-title one">Mã</th>
+						<th class="colum-title">Tài khoản</th>
+						<th class="colum-title">Mật khẩu</th>
+						<th class="colum-title second">Chức năng</th>
 					</tr>
-					<tr ng-repeat="x in listCustomer" class="colum-content-box">
-						<th class="colum-content">{{x.kId}}</th>
+					<tr ng-repeat="x in listCustomer.data" class="colum-content-box">
 						<th class="colum-content">{{x.tId}}</th>
-						<th class="colum-content">{{x.kTen}}</th>
-						<th class="colum-content">{{x.kSdt}}</th>
-						<th class="colum-content">{{x.kDiaChi}}</th>
-						<th class="colum-content">{{x.kEmail}}<i class="fa-regular fa-pen-to-square"></i><i
-								class="fa-solid fa-trash-can"></i></th>
+						<th class="colum-content">{{x.tTaiKhoan}}</th>
+						<th class="colum-content">{{x.tMatKhau}}</th>
+						<th class="colum-content">
+							<!-- nut Xoa -->
+							<i id="Delete" ng-click="Delete(x.tId)" class="fa-solid fa-trash-can"></i>
+						</th>
 					</tr>
 				</table>
-
-				<div class="pagination">
-					<!-- <li class="page-item previous-page"><a href="#" class="page-link">Prev</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">1</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">2</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">3</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">4</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">5</a></li>
-					<li class="page-item dot"><a href="#" class="page-link">...</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">10</a></li>
-					<li class="page-item next-page"><a href="#" class="page-link">Next</a></li> -->
-				</div>
+				<div class="navigation"></div>
 			</div>
 		</main>
 	</section>
+	<script>
+		var app = angular.module('AppBanHang', [])
+		app.controller('MainCtrl', function ($scope, $http, $window) {
+			$scope.listCustomer = [];
+
+			$scope.Delete = function (tId) {
+				if(confirm('Bạn có muốn xoá không?'))
+				{
+					$http({
+						method: "DELETE",
+						url: 'https://localhost:44390/api/Account/delete-account?id=' + tId,
+						dataType: 'json',
+						headers: { "Content-Type": "application/json" }
+					}).then(function () {
+						$scope.Search({
+							page: pageIndex,
+							pageSize: 6
+						})
+						alert('Sản phẩm đã được xóa thành công');
+					}, function () {
+						alert('Không thể xóa sản phẩm. Vui lòng thử lại!');
+					});
+				}
+			};
+			
+
+			let pageIndex = 1;
+			$scope.Search = function (data) {
+				$http({
+					method: 'POST',
+					data,
+					url: 'https://localhost:44390/api/Account/search-account',
+				}).then(function (response) {
+					$scope.listCustomer = response.data;
+					var total = Number(response.data.totalItems);
+					reload(total);
+				});
+			};
+
+			$scope.Search({
+				page: pageIndex,
+				pageSize: 6
+			})
+
+			$scope.SearchByhdbMoTa = function() {
+				$scope.Search({
+					page: pageIndex,
+					pageSize: 6,
+					ten: $scope.TextSearch
+				})
+			}
+
+			function reload(total) {
+				const totalPages = Math.ceil(total / 6);
+				document.querySelector('.navigation').innerHTML = '';
+				for (let index = 0; index < totalPages; index++) {
+					document.querySelector('.navigation').innerHTML += 
+					`<button data-id="${index + 1}" class="btn-primary">${index + 1}</button>`;
+				}
+				const btnNavigation = document.querySelectorAll('button[data-id]');
+				console.log(btnNavigation);
+				btnNavigation.forEach((item) => (
+					item.onclick = () =>
+						$scope.Search({
+							page: item.dataset.id,
+							pageSize: 6,
+						})),
+				);
+			}
+		});
+	</script>
 
 </body>
-
 </html>

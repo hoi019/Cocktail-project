@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,9 +13,10 @@
   <script src="./angular/angularjs.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
+  <script src="../source/script/cart.js"></script>
 </head>
 
-<body>
+<body ng-app="AppBanHang" ng-controller="CartController">
   <!-- Welcome -->
   <div class="top">
     <a href="#">Welcome to our new storefront! Have questions about your account, click here! <i
@@ -29,8 +29,9 @@
       <div class="tool__logo"><a href="main.html"><img src="./images/logo.png" alt="Anh logo thuong hieu"></a></div>
       <div class="tool__item">
         <ul>
-          <li><a href="#"><i class="fa-regular fa-user"></i></a></li>
-          <li><a href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
+          <li><a href="./login.html"><i class="fa-regular fa-user"></i></a></li>
+          <li><a href="./cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+          <li><a><i onclick="logOut()" class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
       </div>
     </div>
@@ -97,41 +98,27 @@
 					<th class="colum-title ">Price</th>
 					<th class="colum-title ">Quantity</th>
 				</tr>
-				<tr>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-trash-can"></i></th>
-					<th class="colum-content bottom-content"> <img src="./images/tool and kits/c1.PNG" alt="" class="img_cart"></th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-minus" onclick=""></i><input type="number" value="1" class="quantity" readonly><i class="fa-solid fa-plus"></i> </th>
-				</tr>
-				<tr>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-trash-can"></i></th>
-					<th class="colum-content bottom-content"> <img src="./images/tool and kits/c1.PNG" alt="" class="img_cart"></th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-minus"></i><input type="number" value="1" class="quantity" readonly><i class="fa-solid fa-plus"></i> </th>
-				</tr>
-				<tr>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-trash-can"></i></th>
-					<th class="colum-content bottom-content"> <img src="./images/tool and kits/c1.PNG" alt="" class="img_cart"></th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-minus"></i><input type="number" value="1" class="quantity" readonly><i class="fa-solid fa-plus"></i> </th>
-				</tr>
-				<tr>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-trash-can"></i></th>
-					<th class="colum-content bottom-content"> <img src="./images/tool and kits/c1.PNG" alt="" class="img_cart"></th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"> du lieu </th>
-					<th class="colum-content bottom-content"><i class="fa-solid fa-minus"></i><input type="number" value="1" class="quantity" readonly><i class="fa-solid fa-plus"></i></th>
+				<tr class="infor-table" ng-repeat="x in cartItems track by $index">
+					<th class="colum-content bottom-content"><i ng-click="removeItem($index)" class="fa-solid fa-trash-can"></i></th>
+					<th class="colum-content bottom-content"><img ng-src="{{x.sAnh}}" alt="" class="img_cart"></th>
+					<th class="colum-content bottom-content">{{x.sTen}}</th>
+					<th class="colum-content bottom-content">{{x.sGia}}</th>
+					<th class="colum-content bottom-content"><i class="fa-solid fa-minus" ng-click='decreaseQuantity($index)'></i>{{x.sSoLuong}}<i class="fa-solid fa-plus" ng-click='increaseQuantity($index)'></i></th>
 				</tr>
 			</table>
 
+      <div class="button-cart" ng-if="cartItems.length === 0" style="margin-top: 60px;display: flex;justify-content: center;font-size: 30px;">
+        <div>There's nothing any product in your cart</div>
+      </div>
+
       <div class="button-cart">
-        <ul>
-          <li>Total: $10</li>
-        </ul>
-        <button>Checkout</button>
+        <!-- <div class="cart-quantity">
+          <div class="quantity">Quantity: </div>
+        </div> -->
+        <div class="cart-total">
+          <div class="total">Total: {{ getTotalPrice() }} VNĐ</div>
+        </div>
+        <button><a ng-click="goToPaymentPage()" style="text-decoration: none;">Payment</a></button>
       </div>
   </section>
 
@@ -188,7 +175,14 @@
     </div>
   </div>
 
-  <script src="../source/script/cart.js"></script>
+  <script>
+    const logOut = () => {
+      localStorage.clear();
+      if(confirm("Bạn có muốn thoát không?")) {
+        window.location.href = 'login.html';
+      }
+    }
+  </script>
 </body>
 
 </html>

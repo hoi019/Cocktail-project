@@ -9,9 +9,11 @@
   <link rel="stylesheet" href="../../source/stylesheet/admin/admin.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 	crossorigin="anonymous"></script>
+	<script src="../angular/angularjs.js"></script>
+	<script src="../../source/script/admin/admin.js"></script>
   <title>Document</title>
 </head>
-<body>
+<body ng-app="AppBanHang" ng-controller="MainCtrl">
   <section id="sidebar">
 		<a href="#" class="brand">
 			<img src="../images/logo.png" alt="" class="img-icon">
@@ -54,6 +56,12 @@
 					<span class="text">Receipts</span>
 				</a>
 			</li>
+			<li>
+				<a href="./statistical.html">
+					<i class="fa-solid fa-chart-simple"></i>
+					<span class="text">Statistical</span>
+				</a>
+			</li>
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -63,9 +71,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="../login.html" class="logout">
+				<a href="./login.html" class="logout">
 					<i class="fa-solid fa-right-from-bracket"></i>
-					<span class="text">Logout</span>
+					<span onclick="logOut()" class="text">Logout</span>
 				</a>
 			</li>
 		</ul>
@@ -77,7 +85,7 @@
 			<i class="fa-solid fa-bars"></i>
 			<a href="#" class="nav-link">Categories</a>
 			<form action="#">
-				<div class="form-input">
+				<div class="form-input" style="width: 400px;">
 					<input type="search" placeholder="Search...">
 					<button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</div>
@@ -172,267 +180,76 @@
 				</form>
 
 				<!-- TABLE CONTENT -->
-				<table class="table-box border-right table-content-box">
+				<table id="table" class="table-box border-right table-content-box">
 					<tr class="colum">
 						<th class="colum-title one">Mã hoá đơn</th>
-						<th class="colum-title">Mã sản phẩm</th>
-						<th class="colum-title">Số lượng</th>
-						<th class="colum-title second">Tổng tiền</th>
+						<th class="colum-title">Mã nhà sản xuất</th>
+						<th class="colum-title">Mô tả</th>
+						<th class="colum-title second">Chức năng</th>
 					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
+					<tr class="colum-content-box" ng-repeat="x in listBill.data">
+						<th class="colum-content">{{x.hdbId}}</th>
+						<th class="colum-content">{{x.kId}}</th>
+						<th class="colum-content">{{x.hdbMoTa}}</th>
+						<th class="colum-content">
+							<i id="Edit" ng-click="Edit(x.hdbId)" class="fa-regular fa-pen-to-square"></i>
+							<i onclick="openOverlay()" ng-click="ShowBillDetail(x.hdbId)" class="fa-solid fa-circle-info fa-trash-can"></i>
+						</th>
 					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					<tr class="colum-content-box">
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> du lieu </th>
-						<th class="colum-content"> $50<i class="fa-regular fa-pen-to-square"></i><i class="fa-solid fa-trash-can"></i></th>
-					</tr>
-					
 				</table>
-
-				<div class="pagination">
-					<!-- <li class="page-item previous-page"><a href="#" class="page-link">Prev</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">1</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">2</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">3</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">4</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">5</a></li>
-					<li class="page-item dot"><a href="#" class="page-link">...</a></li>
-					<li class="page-item current-page"><a href="#" class="page-link">10</a></li>
-					<li class="page-item next-page"><a href="#" class="page-link">Next</a></li> -->
-				</div>
-
+				<div class="navigation"></div>
 				</div>
 			</div>
 		</main>
 	</section>
 
-	<script src="../../source/script/admin/admin.js"></script>
+	<script>
+		var app = angular.module('AppBanHang', [])
+		app.controller('MainCtrl', function ($scope, $http, $window) {
+			let pageIndex = 1;
+				$scope.Search = function (data) {
+					$http({
+						method: 'POST',
+						data,
+						url: 'https://localhost:44390/api/Bill/search-bill',
+					}).then(function (response) {
+						$scope.listBill = response.data;
+						var total = Number(response.data.totalItems);
+						reload(total);
+					});
+				};
+	
+				$scope.Search({
+					page: pageIndex,
+					pageSize: 6
+				})
+	
+				$scope.SearchByhdbMoTa = function() {
+					$scope.Search({
+						page: pageIndex,
+						pageSize: 6,
+						ten: $scope.TextSearch
+					})
+				}
+	
+				function reload(total) {
+					const totalPages = Math.ceil(total / 6);
+					document.querySelector('.navigation').innerHTML = '';
+					for (let index = 0; index < totalPages; index++) {
+						document.querySelector('.navigation').innerHTML += 
+						`<button data-id="${index + 1}" class="btn-primary">${index + 1}</button>`;
+					}
+					const btnNavigation = document.querySelectorAll('button[data-id]');
+					btnNavigation.forEach((item) => (
+						item.onclick = () =>
+							$scope.Search({
+								page: item.dataset.id,
+								pageSize: 6,
+							})),
+					);
+				}
+		})
+	</script>
+
 </body>
 </html>
